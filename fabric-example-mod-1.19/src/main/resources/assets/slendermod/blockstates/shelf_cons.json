@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "slendermod:block/shelf_cons"
+    },
+    "facing=east": {
+      "model": "slendermod:block/shelf_cons",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "slendermod:block/shelf_cons",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "slendermod:block/shelf_cons",
+      "y": 270
+    }
+  }
+}

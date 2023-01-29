@@ -1,0 +1,65 @@
+{
+  "horror_roar": {
+    "subtitle": "slendermod.something_roars",
+    "sounds": [
+      "slendermod:entity/slenderman/roar",
+      "slendermod:entity/slenderman/roar2",
+      "slendermod:entity/slenderman/roar3",
+      "slendermod:entity/slenderman/roar4"
+    ]
+  },
+  "horror_growl": {
+    "subtitle": "slendermod.something_growls",
+    "sounds": [
+      "slendermod:entity/slenderman/growl",
+      "slendermod:entity/slenderman/growl2",
+      "slendermod:entity/slenderman/growl3"
+    ]
+  },
+  "kid_laugh": {
+    "subtitle": "slendermod.something_small_laughs",
+    "sounds": [
+      "slendermod:entity/slenderkid/laugh",
+      "slendermod:entity/slenderkid/laugh2",
+      "slendermod:entity/slenderkid/laugh3"
+    ]
+  },
+  "kid_roar": {
+    "subtitle": "slendermod.something_small_roars",
+    "sounds": [
+      "slendermod:entity/slenderkid/roar",
+      "slendermod:entity/slenderkid/roar2"
+    ]
+  },
+  "shock": {
+    "sounds": [
+      "slendermod:shock/shock1",
+      "slendermod:shock/shock3"
+    ]
+  },
+  "shock_far": {
+    "sounds": [
+      "slendermod:shock/shock2"
+    ]
+  },
+  "breathing": {
+    "sounds": [
+      "slendermod:fear/breathing_fadeinout"
+    ]
+  },
+  "heartbeat": {
+    "sounds": [
+      "slendermod:fear/heartbeat"
+    ]
+  },
+  "something_approaches": {
+    "sounds": [
+      "slendermod:fear/something_approaches"
+    ]
+  },
+  "wind": {
+    "sounds": [
+      "slendermod:fear/wind"
+    ]
+  }
+}
