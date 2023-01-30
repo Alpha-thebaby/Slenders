@@ -1,5 +1,6 @@
 package kelvin.slendermod.common.items;
 
+import kelvin.slendermod.SlenderMod;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.item.ItemGroup;
@@ -8,84 +9,62 @@ import net.minecraft.item.WrittenBookItem;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtList;
 import net.minecraft.nbt.NbtString;
+import net.minecraft.resource.Resource;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
+import java.io.InputStream;
 import java.util.List;
-import java.util.Scanner;
-import java.util.concurrent.atomic.AtomicReference;
-import java.util.stream.Collectors;
+import java.util.Optional;
 
 public class ItemGrimoire extends WrittenBookItem {
+
     public ItemGrimoire() {
         super(new Settings().group(ItemGroup.MISC));
     }
 
+    @Override
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
+        setNbt(stack);
+        super.appendTooltip(stack, world, tooltip, context);
+    }
+
+    public ItemStack setNbt(ItemStack stack) {
         NbtCompound nbtCompound = stack.getOrCreateNbt();
 
-        ArrayList<String> pages = new ArrayList<>();
+        NbtList nbtList = new NbtList();
 
-        var resoure = MinecraftClient.getInstance().getResourceManager().getResource(new Identifier("slendermod", "book/pages.txt"));
+        String[] pagesLines = getBookFileText("pages.txt");
+        for (String pagesLine : pagesLines) {
+            String[] pageLines = getBookFileText(pagesLine);
+            String pageText = "";
 
-        try {
-            BufferedReader reader = resoure.get().getReader();
-
-            var is = resoure.get().getInputStream();
-
-            String str = new String(is.readAllBytes());
-
-            String[] files = str.split("\n");
-
-            for (String line : files) {
-                var file = MinecraftClient.getInstance().getResourceManager().getResource(new Identifier("slendermod", "book/"+line.trim()));
-
-                try {
-                    var stream = file.get().getInputStream();
-
-                    String all_text = new String(stream.readAllBytes());
-
-                    System.out.println(all_text);
-
-                    String[] lines = all_text.split("\n");
-
-                    String page = "";
-
-                    int max_lines = 14;
-                    int chars_per_line = 19;
-                    for (int i = 0; i < 10; i++)
-                    {
-                        page += "A";
-                    }
-
-                    pages.add(page.trim());
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
+            for (String line : pageLines) {
+                pageText += line;
             }
 
-            reader.close();
-
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
-        NbtList nbtList = new NbtList();
-        for (int i = 0; i < pages.size(); i++) {
-            nbtList.add(NbtString.of(pages.get(i)));
+            nbtList.add(NbtString.of(pageText));
         }
 
         stack.setSubNbt("pages", nbtList);
         nbtCompound.putString("author", "Unknown");
         nbtCompound.putString("title", "Grimoire");
         nbtCompound.putInt("generation", 0);
-        stack.setSubNbt("pages", nbtList);
-        super.appendTooltip(stack, world, tooltip, context);
+        return stack;
+    }
+
+    private String[] getBookFileText(String fileName) {
+        try {
+            Optional<Resource> file = MinecraftClient.getInstance().getResourceManager().getResource(new Identifier("slendermod", "book/" + fileName.trim()));
+            InputStream stream = file.get().getInputStream();
+            String text = new String(stream.readAllBytes());
+            return text.split("\r");
+        }
+        catch (Exception e) {
+            SlenderMod.LOGGER.warn("Failed to read book text file");
+        }
+        return new String[] {};
     }
 }
