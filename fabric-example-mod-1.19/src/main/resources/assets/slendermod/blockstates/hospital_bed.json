@@ -16,16 +16,16 @@
       "y": 270
     },
     "part=foot,facing=north": {
-      "model": "minecraft:block/air"
+      "model": "slendermod:block/hospital_bed_foot"
     },
     "part=foot,facing=east": {
-      "model": "minecraft:block/air"
+      "model": "slendermod:block/hospital_bed_foot"
     },
     "part=foot,facing=south": {
-      "model": "minecraft:block/air"
+      "model": "slendermod:block/hospital_bed_foot"
     },
     "part=foot,facing=west": {
-      "model": "minecraft:block/air"
+      "model": "slendermod:block/hospital_bed_foot"
     }
   }
 }

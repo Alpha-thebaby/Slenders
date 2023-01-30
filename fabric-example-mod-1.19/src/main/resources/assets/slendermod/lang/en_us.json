@@ -2,8 +2,22 @@
   "item.slendermod.flashlight": "Flashlight",
   "item.slendermod.boss_dash": "Boss Dash Attack",
   "item.slendermod.boss_hit": "Boss Hit Attack",
+  "item.slendermod.grimoire": "Grimoire",
+
+  "block.slendermod.barbed_wire_fence": "Barbed Wire Fence",
+  "block.slendermod.slender_head": "Slenderman Head",
+  "block.slendermod.bed": "Sub Bed",
+  "block.slendermod.hospital_bed": "Hospital Bed",
+  "block.slendermod.shelf_cons": "Shelf of Cans",
+  "block.slendermod.exit_sign": "Exit Sign",
+  "block.slendermod.dead_leaves": "Dead Leaves",
+  "block.slendermod.dead_tree": "Dead Tree",
+  "block.slendermod.bones": "Bones",
 
   "entity.slendermod.putrid_horror": "Putrid Horror",
+  "entity.slendermod.slenderman": "Slenderman",
+  "entity.slendermod.small_slender": "Small Slenderman",
+  "entity.slendermod.slender_boss": "Slenderman Boss",
 
   "slendermod.something_roars": "Something Roars"
 }
