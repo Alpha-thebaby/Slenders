@@ -41,7 +41,7 @@ public class BlockRegistry {
     public static Block BED = Registry.register(
             Registry.BLOCK,
             new Identifier("slendermod", "bed"),
-            new CustomBedBlock(DyeColor.WHITE, AbstractBlock.Settings.copy(Blocks.RED_BED))
+            new SubBedBlock(DyeColor.WHITE, AbstractBlock.Settings.copy(Blocks.RED_BED))
     );
 
     public static Block HOSPITAL_BED = Registry.register(
