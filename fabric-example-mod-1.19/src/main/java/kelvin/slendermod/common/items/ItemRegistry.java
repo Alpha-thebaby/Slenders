@@ -1,6 +1,7 @@
 package kelvin.slendermod.common.items;
 
 import kelvin.slendermod.common.blocks.BlockRegistry;
+import kelvin.slendermod.common.entities.EntityRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.minecraft.item.*;
@@ -84,6 +85,24 @@ public class ItemRegistry {
             Registry.ITEM,
             new Identifier("slendermod", "bones"),
             new BlockItem(BlockRegistry.BONES, new Item.Settings().group(ItemGroup.DECORATIONS))
+    );
+
+    public static Item SLENDERMAN_SPAWN_EGG = Registry.register(
+            Registry.ITEM,
+            new Identifier("slendermod", "slenderman_spawn_egg"),
+            new SpawnEggItem(EntityRegistry.SLENDERMAN, 9078144, 5722960, new Item.Settings().group(ItemGroup.MISC))
+    );
+
+    public static Item SMALL_SLENDER_SPAWN_EGG = Registry.register(
+            Registry.ITEM,
+            new Identifier("slendermod", "small_slender_spawn_egg"),
+            new SpawnEggItem(EntityRegistry.SMALL_SLENDER, 5722960, 9078144, new Item.Settings().group(ItemGroup.MISC))
+    );
+
+    public static Item SLENDER_BOSS_SPAWN_EGG = Registry.register(
+            Registry.ITEM,
+            new Identifier("slendermod", "slender_boss_spawn_egg"),
+            new SpawnEggItem(EntityRegistry.SLENDER_BOSS, 11578536, 12688761, new Item.Settings().group(ItemGroup.MISC))
     );
 
     public static void Register() {
