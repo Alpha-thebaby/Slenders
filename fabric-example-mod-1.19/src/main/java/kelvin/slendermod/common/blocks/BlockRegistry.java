@@ -107,7 +107,7 @@ public class BlockRegistry {
     public static Block BONES = Registry.register(
             Registry.BLOCK,
             new Identifier("slendermod", "bones"),
-            new CustomFacingBlock(AbstractBlock.Settings.copy(Blocks.BONE_BLOCK).noCollision())
+            new BonesBlock(AbstractBlock.Settings.copy(Blocks.BONE_BLOCK).noCollision())
     );
 
     public static void Register() {
