@@ -22,6 +22,7 @@ public class BlockRegistry {
             new Identifier("slendermod", "slender_head"),
             new CustomSkullBlock(AbstractBlock.Settings.copy(Blocks.SKELETON_SKULL))
     );
+
     public static LeavesBlock DEAD_LEAVES = Registry.register(
             Registry.BLOCK,
             new Identifier("slendermod", "dead_leaves"),
@@ -31,13 +32,13 @@ public class BlockRegistry {
     public static Block EXIT_SIGN = Registry.register(
             Registry.BLOCK,
             new Identifier("slendermod", "exit_sign"),
-            new CustomFacingBlock(AbstractBlock.Settings.copy(Blocks.ACACIA_SIGN))
+            new CustomFacingBlock(AbstractBlock.Settings.copy(Blocks.ACACIA_SIGN).mapColor(MapColor.WHITE))
     );
 
     public static Block SHELF_CONS = Registry.register(
             Registry.BLOCK,
             new Identifier("slendermod", "shelf_cons"),
-            new CustomFacingBlock(AbstractBlock.Settings.copy(Blocks.ACACIA_SIGN).sounds(BlockSoundGroup.METAL))
+            new CustomFacingBlock(AbstractBlock.Settings.copy(Blocks.IRON_BLOCK).noCollision())
     );
 
     public static Block BED = Registry.register(
@@ -55,7 +56,7 @@ public class BlockRegistry {
     public static Block DEAD_TREE = Registry.register(
             Registry.BLOCK,
             new Identifier("slendermod", "dead_tree"),
-            new DeadTreeBlock(AbstractBlock.Settings.copy(Blocks.OAK_PLANKS).nonOpaque())
+            new DeadTreeBlock(AbstractBlock.Settings.copy(Blocks.OAK_PLANKS).nonOpaque().mapColor(MapColor.SPRUCE_BROWN))
     );
 
     public static Block CAR_BODY = Registry.register(
@@ -76,25 +77,25 @@ public class BlockRegistry {
             new DebrisBlock(AbstractBlock.Settings.copy(Blocks.STONE_BUTTON).nonOpaque())
     );
 
-    public static BlockEntityType DEAD_TREE_ENTITY = Registry.register(
+    public static BlockEntityType<?> DEAD_TREE_ENTITY = Registry.register(
             Registry.BLOCK_ENTITY_TYPE,
             "slendermod:dead_tree",
             BlockEntityType.Builder.create(DeadTreeBlockEntity::new, DEAD_TREE).build(Util.getChoiceType(TypeReferences.BLOCK_ENTITY, "slendermod:dead_tree"))
     );
 
-    public static BlockEntityType CAR_BODY_ENTITY = Registry.register(
+    public static BlockEntityType<?> CAR_BODY_ENTITY = Registry.register(
             Registry.BLOCK_ENTITY_TYPE,
             "slendermod:car_body",
             BlockEntityType.Builder.create(CarBodyBlockEntity::new, CAR_BODY).build(Util.getChoiceType(TypeReferences.BLOCK_ENTITY, "slendermod:car_body"))
     );
 
-    public static BlockEntityType TRASH_ENTITY = Registry.register(
+    public static BlockEntityType<?> TRASH_ENTITY = Registry.register(
             Registry.BLOCK_ENTITY_TYPE,
             "slendermod:trash",
             BlockEntityType.Builder.create(TrashBlockEntity::new, TRASH).build(Util.getChoiceType(TypeReferences.BLOCK_ENTITY, "slendermod:trash"))
     );
 
-    public static BlockEntityType DEBRIS_ENTITY = Registry.register(
+    public static BlockEntityType<?> DEBRIS_ENTITY = Registry.register(
             Registry.BLOCK_ENTITY_TYPE,
             "slendermod:debris",
             BlockEntityType.Builder.create(DebrisBlockEntity::new, DEBRIS).build(Util.getChoiceType(TypeReferences.BLOCK_ENTITY, "slendermod:debris"))
@@ -103,13 +104,13 @@ public class BlockRegistry {
     public static Block BARBED_WIRE_FENCE = Registry.register(
             Registry.BLOCK,
             new Identifier("slendermod", "barbed_wire_fence"),
-            new CustomFenceBlock(AbstractBlock.Settings.copy(Blocks.ACACIA_FENCE))
+            new CustomFenceBlock(AbstractBlock.Settings.copy(Blocks.SPRUCE_FENCE))
     );
 
     public static Block BONES = Registry.register(
             Registry.BLOCK,
             new Identifier("slendermod", "bones"),
-            new CustomFacingBlock(AbstractBlock.Settings.copy(Blocks.ACACIA_SIGN))
+            new CustomFacingBlock(AbstractBlock.Settings.copy(Blocks.BONE_BLOCK).noCollision())
     );
 
     public static void Register() {
