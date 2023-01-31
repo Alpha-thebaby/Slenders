@@ -5,11 +5,8 @@ import kelvin.slendermod.common.blocks.entities.DeadTreeBlockEntity;
 import kelvin.slendermod.common.blocks.entities.DebrisBlockEntity;
 import kelvin.slendermod.common.blocks.entities.TrashBlockEntity;
 import net.minecraft.block.*;
-import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityType;
-import net.minecraft.block.entity.FurnaceBlockEntity;
 import net.minecraft.datafixer.TypeReferences;
-import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.DyeColor;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Util;
@@ -17,10 +14,10 @@ import net.minecraft.util.registry.Registry;
 
 public class BlockRegistry {
 
-    public static CustomSkullBlock SLENDER_HEAD = Registry.register(
+    public static SlendermanHeadBlock SLENDER_HEAD = Registry.register(
             Registry.BLOCK,
             new Identifier("slendermod", "slender_head"),
-            new CustomSkullBlock(AbstractBlock.Settings.copy(Blocks.SKELETON_SKULL))
+            new SlendermanHeadBlock(AbstractBlock.Settings.copy(Blocks.SKELETON_SKULL))
     );
 
     public static LeavesBlock DEAD_LEAVES = Registry.register(
