@@ -17,6 +17,7 @@ import net.minecraft.client.render.block.entity.BlockEntityRendererFactories;
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactory;
 
 public class RenderingRegistry {
+
     public static void Register() {
         EntityRendererRegistry.register(EntityRegistry.SLENDERMAN, RendererSlenderman::new);
         EntityRendererRegistry.register(EntityRegistry.SLENDER_BOSS, RendererSlenderBoss::new);
@@ -27,11 +28,11 @@ public class RenderingRegistry {
         BlockRenderLayerMap.INSTANCE.putBlock(BlockRegistry.SHELF_CONS, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(BlockRegistry.BARBED_WIRE_FENCE, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(BlockRegistry.BONES, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(BlockRegistry.HOSPITAL_BED, RenderLayer.getTranslucent());
 
         BlockEntityRendererRegistry.register(BlockRegistry.DEAD_TREE_ENTITY, (BlockEntityRendererFactory.Context rendererDispatcherIn) -> new RenderDeadTree());
         BlockEntityRendererRegistry.register(BlockRegistry.CAR_BODY_ENTITY, (BlockEntityRendererFactory.Context rendererDispatcherIn) -> new RenderCarBody());
         BlockEntityRendererRegistry.register(BlockRegistry.TRASH_ENTITY, (BlockEntityRendererFactory.Context rendererDispatcherIn) -> new RenderTrash());
         BlockEntityRendererRegistry.register(BlockRegistry.DEBRIS_ENTITY, (BlockEntityRendererFactory.Context rendererDispatcherIn) -> new RenderDebris());
-
     }
 }
