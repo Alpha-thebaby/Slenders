@@ -35,7 +35,7 @@ public class BlockRegistry {
     public static Block SHELF_CONS = Registry.register(
             Registry.BLOCK,
             new Identifier("slendermod", "shelf_cons"),
-            new CustomFacingBlock(AbstractBlock.Settings.copy(Blocks.IRON_BLOCK).noCollision())
+            new ShelfConsBlock(AbstractBlock.Settings.copy(Blocks.IRON_BLOCK).noCollision())
     );
 
     public static Block BED = Registry.register(
