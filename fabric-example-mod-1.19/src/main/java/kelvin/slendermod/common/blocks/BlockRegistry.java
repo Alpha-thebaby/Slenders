@@ -29,7 +29,7 @@ public class BlockRegistry {
     public static Block EXIT_SIGN = Registry.register(
             Registry.BLOCK,
             new Identifier("slendermod", "exit_sign"),
-            new CustomFacingBlock(AbstractBlock.Settings.copy(Blocks.ACACIA_SIGN).mapColor(MapColor.WHITE))
+            new ExitSignBlock(AbstractBlock.Settings.copy(Blocks.ACACIA_SIGN).mapColor(MapColor.WHITE))
     );
 
     public static Block SHELF_CONS = Registry.register(
