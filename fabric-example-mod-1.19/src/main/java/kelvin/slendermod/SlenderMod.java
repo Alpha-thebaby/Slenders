@@ -21,6 +21,7 @@ import net.minecraft.client.gl.Framebuffer;
 import net.minecraft.client.gl.WindowFramebuffer;
 import net.minecraft.client.input.KeyboardInput;
 import net.minecraft.client.option.KeyBinding;
+import net.minecraft.client.render.Camera;
 import net.minecraft.client.render.Shader;
 import net.minecraft.client.sound.PositionedSoundInstance;
 import net.minecraft.client.sound.SoundInstance;
@@ -76,7 +77,6 @@ public class SlenderMod implements ModInitializer, ClientModInitializer {
 
 		ClientPacketHandler.Start();
 
-		var minecraft = MinecraftClient.getInstance();
 		crawlKey = new KeyBinding("key.crawl", GLFW.GLFW_KEY_G, "key.categories.movement");
 
 
@@ -84,11 +84,18 @@ public class SlenderMod implements ModInitializer, ClientModInitializer {
 		SoundRegistry.Register();
 
 		ClientTickEvents.START_CLIENT_TICK.register((client) -> {
+			if (client.isPaused()) {
+				return;
+			}
+
 			float tickDelta = 1.0f / 20.0f;
 			if (scared_timer > 0) {
 				if (heartbeat_delay <= 0) {
-					playPositionlessSound(minecraft.getCameraEntity().getX(), minecraft.getCameraEntity().getY(), minecraft.getCameraEntity().getZ(), SoundRegistry.HEARTBEAT, SoundCategory.AMBIENT, 1.0f, 1.0f);
-					heartbeat_delay = 20 * 5;
+					Entity camera = client.getCameraEntity();
+					if (camera != null) {
+						playPositionlessSound(client, camera.getX(), camera.getY(), camera.getZ(), SoundRegistry.HEARTBEAT, SoundCategory.AMBIENT, 1.0f, 1.0f);
+						heartbeat_delay = 20 * 5;
+					}
 				}
 				fear_zoom = MathHelper.lerp(tickDelta * 8, fear_zoom, 0.5f);
 				fright_blur = MathHelper.lerp(tickDelta * 4, fright_blur, 1);
@@ -117,6 +124,11 @@ public class SlenderMod implements ModInitializer, ClientModInitializer {
 		});
 
 		ShaderEffectRenderCallback.EVENT.register(tickDelta -> {
+			MinecraftClient minecraft = MinecraftClient.getInstance();
+
+			if (minecraft == null) {
+				return;
+			}
 
 			if (this.framebuffer == null) {
 				this.framebuffer = new WindowFramebuffer(minecraft.getWindow().getFramebufferWidth(), minecraft.getWindow().getFramebufferHeight());
@@ -141,8 +153,8 @@ public class SlenderMod implements ModInitializer, ClientModInitializer {
 			if (minecraft.world != null) {
 				minecraft.world.getEntities().forEach((entity) -> {
 					if (entity instanceof EntitySlenderman || entity instanceof EntitySmallSlender) {
-						if (lookingAtEntity(entity)) {
-							scare();
+						if (lookingAtEntity(minecraft, entity)) {
+							scare(minecraft);
 						}
 					}
 				});
@@ -173,10 +185,8 @@ public class SlenderMod implements ModInitializer, ClientModInitializer {
 		GL30.glFramebufferTexture2D(GL30.GL_FRAMEBUFFER, GL30.GL_COLOR_ATTACHMENT0, GL30.GL_TEXTURE_2D, 0, 0);
 	}
 
-	public static void scare()
+	public static void scare(MinecraftClient minecraft)
 	{
-		var minecraft = MinecraftClient.getInstance();
-
 		float x = 0;
 		float y = 0;
 		float z = 0;
@@ -185,33 +195,31 @@ public class SlenderMod implements ModInitializer, ClientModInitializer {
 			x = (float)minecraft.cameraEntity.getX();
 			y = (float)minecraft.cameraEntity.getY();
 			z = (float)minecraft.cameraEntity.getZ();
-
-			MinecartEntity mc;
 		}
 
 		if (scared_timer <= 0) {
-			playPositionlessSound(x, y, z, SoundRegistry.SHOCK, SoundCategory.AMBIENT, 1.0f, new Random().nextFloat() * 0.5f - 0.25f + 1.0f);
+			playPositionlessSound(minecraft, x, y, z, SoundRegistry.SHOCK, SoundCategory.AMBIENT, 1.0f, new Random().nextFloat() * 0.5f - 0.25f + 1.0f);
 
 			fear_zoom = 2.0f;
 		}
 		if (breath_timer <= 0) {
 			breath_timer = 20 * 60;
-			playPositionlessSound(x, y, z, SoundRegistry.BREATHING, SoundCategory.AMBIENT, 1.0f, 1.0f);
-			playPositionlessSound(x, y, z, SoundRegistry.WIND, SoundCategory.AMBIENT, 1.0f, 1.0f);
+			playPositionlessSound(minecraft, x, y, z, SoundRegistry.BREATHING, SoundCategory.AMBIENT, 1.0f, 1.0f);
+			playPositionlessSound(minecraft, x, y, z, SoundRegistry.WIND, SoundCategory.AMBIENT, 1.0f, 1.0f);
 		}
 		if (scare_music <= 0) {
 			scare_music = 20 * 60 * 2.5f;
-			playPositionlessSound(x, y, z, SoundRegistry.SOMETHING_APPROACHES, SoundCategory.AMBIENT, 1.0f, new Random().nextFloat() * 0.5f - 0.25f + 1.0f);
+			playPositionlessSound(minecraft, x, y, z, SoundRegistry.SOMETHING_APPROACHES, SoundCategory.AMBIENT, 1.0f, new Random().nextFloat() * 0.5f - 0.25f + 1.0f);
 		}
 		scared_timer = 10;
 		fear_zoom = MathHelper.lerp(0.5f, fear_zoom, 2.0f);
 	}
 
-	public static boolean lookingAtEntity(Entity entity) {
-		var camera = MinecraftClient.getInstance().getCameraEntity();
+	public static boolean lookingAtEntity(MinecraftClient minecraft, Entity entity) {
+		Entity camera = minecraft.getCameraEntity();
 		if (camera != null) {
 			if (camera instanceof PlayerEntity) {
-				Quaternion quat = MinecraftClient.getInstance().gameRenderer.getCamera().getRotation();
+				Quaternion quat = minecraft.gameRenderer.getCamera().getRotation();
 				Vec3f vec = new Vec3f(0, 0, 1);
 				vec.rotate(quat);
 
@@ -228,12 +236,8 @@ public class SlenderMod implements ModInitializer, ClientModInitializer {
 		return false;
 	}
 
-	public static void playPositionlessSound(double x, double y, double z, SoundEvent event, SoundCategory category, float volume, float pitch) {
-
-		double d = MinecraftClient.getInstance().gameRenderer.getCamera().getPos().squaredDistanceTo(x, y, z);
-
-		PositionedSoundInstance positionedSoundInstance = new PositionedSoundInstance(event.getId(), category, volume, pitch, MinecraftClient.getInstance().world.random, false, 0, SoundInstance.AttenuationType.NONE, x, y, z, false);
-		MinecraftClient.getInstance().getSoundManager().play(positionedSoundInstance);
-
+	public static void playPositionlessSound(MinecraftClient minecraft, double x, double y, double z, SoundEvent event, SoundCategory category, float volume, float pitch) {
+		PositionedSoundInstance positionedSoundInstance = new PositionedSoundInstance(event.getId(), category, volume, pitch, minecraft.world.random, false, 0, SoundInstance.AttenuationType.NONE, x, y, z, false);
+		minecraft.getSoundManager().play(positionedSoundInstance);
 	}
 }
