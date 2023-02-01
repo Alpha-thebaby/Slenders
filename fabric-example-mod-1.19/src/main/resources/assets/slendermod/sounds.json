@@ -61,5 +61,10 @@
     "sounds": [
       "slendermod:fear/wind"
     ]
+  },
+  "buzzing": {
+    "sounds": [
+      "slendermod:buzzing"
+    ]
   }
 }

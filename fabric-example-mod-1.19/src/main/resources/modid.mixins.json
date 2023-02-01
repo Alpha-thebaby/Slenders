@@ -4,14 +4,15 @@
   "package": "kelvin.slendermod.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
-    "ServerPlayerEntityMixin",
+    "LivingEntityMixin",
+    "PillarBlockMixin",
     "PlayerEntityMixin",
     "PlayerScreenHandlerMixin",
-    "LivingEntityMixin"
+    "ServerPlayerEntityMixin"
   ],
   "client": [
-    "ClientPlayNetworkHandlerMixin",
     "ClientPlayerEntityMixin",
+    "ClientPlayNetworkHandlerMixin",
     "GameOptionsMixin",
     "PlayerEntityRendererMixin"
   ],

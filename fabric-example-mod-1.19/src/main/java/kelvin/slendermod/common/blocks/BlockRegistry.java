@@ -1,9 +1,6 @@
 package kelvin.slendermod.common.blocks;
 
-import kelvin.slendermod.common.blocks.entities.CarBodyBlockEntity;
-import kelvin.slendermod.common.blocks.entities.DeadTreeBlockEntity;
-import kelvin.slendermod.common.blocks.entities.DebrisBlockEntity;
-import kelvin.slendermod.common.blocks.entities.TrashBlockEntity;
+import kelvin.slendermod.common.blocks.entities.*;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.datafixer.TypeReferences;
@@ -96,6 +93,12 @@ public class BlockRegistry {
             Registry.BLOCK_ENTITY_TYPE,
             "slendermod:debris",
             BlockEntityType.Builder.create(DebrisBlockEntity::new, DEBRIS).build(Util.getChoiceType(TypeReferences.BLOCK_ENTITY, "slendermod:debris"))
+    );
+
+    public static BlockEntityType<FroglightBlockEntity> FROGLIGHT_ENTITY = Registry.register(
+            Registry.BLOCK_ENTITY_TYPE,
+            "slendermod:froglight",
+            BlockEntityType.Builder.create(FroglightBlockEntity::new, Blocks.OCHRE_FROGLIGHT, Blocks.VERDANT_FROGLIGHT, Blocks.PEARLESCENT_FROGLIGHT).build(Util.getChoiceType(TypeReferences.BLOCK_ENTITY, "slendermod:froglight"))
     );
 
     public static Block BARBED_WIRE_FENCE = Registry.register(
