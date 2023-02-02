@@ -128,6 +128,12 @@ public class ItemRegistry {
             new Identifier("slendermod", "car_body"),
             new BlockItem(BlockRegistry.CAR_BODY, new Item.Settings().group(ItemGroup.DECORATIONS))
     );
+
+    public static Item ACCESS_CARD = Registry.register(
+            Registry.ITEM,
+            new Identifier("slendermod", "access_card"),
+            new Item(new Item.Settings().group(ItemGroup.MISC))
+    );
     public static void Register() {
 
     }
