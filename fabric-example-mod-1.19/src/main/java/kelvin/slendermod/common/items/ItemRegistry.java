@@ -111,6 +111,23 @@ public class ItemRegistry {
             new SpawnEggItem(EntityRegistry.SLENDER_BOSS, 11578536, 12688761, new Item.Settings().group(ItemGroup.MISC))
     );
 
+    public static BlockItem TRASH = Registry.register(
+            Registry.ITEM,
+            new Identifier("slendermod", "trash"),
+            new BlockItem(BlockRegistry.TRASH, new Item.Settings().group(ItemGroup.DECORATIONS))
+    );
+
+    public static BlockItem DEBRIS = Registry.register(
+            Registry.ITEM,
+            new Identifier("slendermod", "debris"),
+            new BlockItem(BlockRegistry.DEBRIS, new Item.Settings().group(ItemGroup.DECORATIONS))
+    );
+
+    public static BlockItem CAR_BODY = Registry.register(
+            Registry.ITEM,
+            new Identifier("slendermod", "car_body"),
+            new BlockItem(BlockRegistry.CAR_BODY, new Item.Settings().group(ItemGroup.DECORATIONS))
+    );
     public static void Register() {
 
     }

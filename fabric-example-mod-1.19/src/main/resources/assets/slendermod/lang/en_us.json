@@ -17,6 +17,9 @@
   "block.slendermod.dead_tree": "Dead Tree",
   "block.slendermod.scratched_dead_tree": "Scratched Dead Tree",
   "block.slendermod.bones": "Bones",
+  "block.slendermod.car_body": "Car Body",
+  "block.slendermod.trash": "Trash",
+  "block.slendermod.debris": "Debris",
 
   "entity.slendermod.putrid_horror": "Putrid Horror",
   "entity.slendermod.slenderman": "Slenderman",
