@@ -126,6 +126,12 @@ public class BlockRegistry {
             new Block(AbstractBlock.Settings.copy(Blocks.GRASS_BLOCK))
     );
 
+    public static Block MANHOLE_COVER = Registry.register(
+            Registry.BLOCK,
+            new Identifier("slendermod", "manhole_cover"),
+            new ManholeCoverBlock(AbstractBlock.Settings.copy(Blocks.IRON_TRAPDOOR))
+    );
+
     public static void Register() {
 
     }

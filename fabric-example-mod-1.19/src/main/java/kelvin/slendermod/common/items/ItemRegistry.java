@@ -2,9 +2,10 @@ package kelvin.slendermod.common.items;
 
 import kelvin.slendermod.common.blocks.BlockRegistry;
 import kelvin.slendermod.common.entities.EntityRegistry;
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
-import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
-import net.minecraft.item.*;
+import net.minecraft.item.BlockItem;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemGroup;
+import net.minecraft.item.SpawnEggItem;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
@@ -140,6 +141,13 @@ public class ItemRegistry {
             new Identifier("slendermod", "access_card"),
             new Item(new Item.Settings().group(ItemGroup.MISC))
     );
+
+    public static BlockItem MANHOLE_COVER = Registry.register(
+            Registry.ITEM,
+            new Identifier("slendermod", "manhole_cover"),
+            new BlockItem(BlockRegistry.MANHOLE_COVER, new Item.Settings().group(ItemGroup.DECORATIONS))
+    );
+
     public static void Register() {
 
     }
