@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "slendermod:item/dead_tree"
+    "layer0": "slendermod:item/scratched_dead_tree"
   }
 }

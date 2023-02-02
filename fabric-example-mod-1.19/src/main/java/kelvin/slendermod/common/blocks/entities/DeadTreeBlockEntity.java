@@ -1,6 +1,7 @@
 package kelvin.slendermod.common.blocks.entities;
 
 import kelvin.slendermod.common.blocks.BlockRegistry;
+import kelvin.slendermod.common.blocks.DeadTreeBlock;
 import kelvin.slendermod.common.entities.EntitySlenderman;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
@@ -16,9 +17,15 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 public class DeadTreeBlockEntity extends BlockEntity implements IAnimatable {
 
     private AnimationFactory factory = new AnimationFactory(this);
+    private final boolean isScratched;
+
+    public DeadTreeBlockEntity(BlockPos pos, BlockState state, boolean isScratched) {
+        super(BlockRegistry.DEAD_TREE_ENTITY, pos, state);
+        this.isScratched = isScratched;
+    }
 
     public DeadTreeBlockEntity(BlockPos pos, BlockState state) {
-        super(BlockRegistry.DEAD_TREE_ENTITY, pos, state);
+        this(pos, state, false);
     }
 
     private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
@@ -35,5 +42,9 @@ public class DeadTreeBlockEntity extends BlockEntity implements IAnimatable {
     @Override
     public AnimationFactory getFactory() {
         return this.factory;
+    }
+
+    public boolean isScratched() {
+        return isScratched;
     }
 }

@@ -50,7 +50,13 @@ public class BlockRegistry {
     public static Block DEAD_TREE = Registry.register(
             Registry.BLOCK,
             new Identifier("slendermod", "dead_tree"),
-            new DeadTreeBlock(AbstractBlock.Settings.copy(Blocks.OAK_PLANKS).nonOpaque().mapColor(MapColor.SPRUCE_BROWN))
+            new DeadTreeBlock(AbstractBlock.Settings.copy(Blocks.OAK_PLANKS).nonOpaque().mapColor(MapColor.SPRUCE_BROWN), false)
+    );
+
+    public static Block SCRATCHED_DEAD_TREE = Registry.register(
+            Registry.BLOCK,
+            new Identifier("slendermod", "scratched_dead_tree"),
+            new DeadTreeBlock(AbstractBlock.Settings.copy(Blocks.OAK_PLANKS).nonOpaque().mapColor(MapColor.SPRUCE_BROWN), true)
     );
 
     public static Block CAR_BODY = Registry.register(
@@ -74,7 +80,7 @@ public class BlockRegistry {
     public static BlockEntityType<?> DEAD_TREE_ENTITY = Registry.register(
             Registry.BLOCK_ENTITY_TYPE,
             "slendermod:dead_tree",
-            BlockEntityType.Builder.create(DeadTreeBlockEntity::new, DEAD_TREE).build(Util.getChoiceType(TypeReferences.BLOCK_ENTITY, "slendermod:dead_tree"))
+            BlockEntityType.Builder.create(DeadTreeBlockEntity::new, DEAD_TREE, SCRATCHED_DEAD_TREE).build(Util.getChoiceType(TypeReferences.BLOCK_ENTITY, "slendermod:dead_tree"))
     );
 
     public static BlockEntityType<?> CAR_BODY_ENTITY = Registry.register(

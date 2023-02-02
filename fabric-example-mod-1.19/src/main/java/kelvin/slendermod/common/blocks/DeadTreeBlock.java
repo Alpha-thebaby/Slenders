@@ -10,8 +10,12 @@ import net.minecraft.util.math.BlockPos;
 import org.jetbrains.annotations.Nullable;
 
 public class DeadTreeBlock extends CustomFacingBlock implements BlockEntityProvider {
-    public DeadTreeBlock(Settings settings) {
+
+    private final boolean isScratched;
+
+    public DeadTreeBlock(Settings settings, boolean isScratched) {
         super(settings);
+        this.isScratched = isScratched;
     }
 
     @Override
@@ -22,6 +26,6 @@ public class DeadTreeBlock extends CustomFacingBlock implements BlockEntityProvi
     @Nullable
     @Override
     public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
-        return new DeadTreeBlockEntity(pos, state);
+        return new DeadTreeBlockEntity(pos, state, isScratched);
     }
 }

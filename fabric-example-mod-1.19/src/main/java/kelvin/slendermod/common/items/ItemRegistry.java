@@ -75,6 +75,12 @@ public class ItemRegistry {
             new BlockItem(BlockRegistry.DEAD_TREE, new Item.Settings().group(ItemGroup.DECORATIONS))
     );
 
+    public static BlockItem SCRATCHED_DEAD_TREE = Registry.register(
+            Registry.ITEM,
+            new Identifier("slendermod", "scratched_dead_tree"),
+            new BlockItem(BlockRegistry.SCRATCHED_DEAD_TREE, new Item.Settings().group(ItemGroup.DECORATIONS))
+    );
+
     public static BlockItem BARBED_WIRE_FENCE = Registry.register(
             Registry.ITEM,
             new Identifier("slendermod", "barbed_wire_fence"),
