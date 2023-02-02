@@ -18,9 +18,9 @@ public class FroglightBlockEntity extends BlockEntity {
     }
 
     public static void tick(World world, BlockPos pos, BlockState state, FroglightBlockEntity blockEntity) {
-        if (blockEntity.tickCount <= 0 || blockEntity.tickCount >= (blockEntity.startTick + 440)) {
+        if (blockEntity.tickCount <= 0 || blockEntity.tickCount >= (blockEntity.startTick + 40)) {
             blockEntity.startTick = blockEntity.tickCount;
-            world.playSound(pos.getX(), pos.getY(), pos.getZ(), SoundRegistry.BUZZING, SoundCategory.BLOCKS, 0.8F, 1, false);
+            world.playSound(pos.getX(), pos.getY(), pos.getZ(), SoundRegistry.BUZZING, SoundCategory.BLOCKS, 0.1F, 1, true);
         }
         ++blockEntity.tickCount;
     }
