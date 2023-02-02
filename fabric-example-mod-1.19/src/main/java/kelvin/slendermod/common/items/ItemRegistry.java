@@ -129,6 +129,12 @@ public class ItemRegistry {
             new BlockItem(BlockRegistry.CAR_BODY, new Item.Settings().group(ItemGroup.DECORATIONS))
     );
 
+    public static BlockItem DEAD_GRASS_BLOCK = Registry.register(
+            Registry.ITEM,
+            new Identifier("slendermod", "dead_grass_block"),
+            new BlockItem(BlockRegistry.DEAD_GRASS_BLOCK, new Item.Settings().group(ItemGroup.DECORATIONS))
+    );
+
     public static Item ACCESS_CARD = Registry.register(
             Registry.ITEM,
             new Identifier("slendermod", "access_card"),

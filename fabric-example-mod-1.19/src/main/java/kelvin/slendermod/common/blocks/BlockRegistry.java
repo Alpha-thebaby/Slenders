@@ -120,6 +120,12 @@ public class BlockRegistry {
             new BonesBlock(AbstractBlock.Settings.of(Material.STONE, MapColor.PALE_YELLOW).strength(2.0F).sounds(BlockSoundGroup.BONE).noCollision())
     );
 
+    public static Block DEAD_GRASS_BLOCK = Registry.register(
+            Registry.BLOCK,
+            new Identifier("slendermod", "dead_grass_block"),
+            new Block(AbstractBlock.Settings.copy(Blocks.GRASS_BLOCK))
+    );
+
     public static void Register() {
 
     }
