@@ -4,6 +4,7 @@ import kelvin.slendermod.common.blocks.entities.*;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.datafixer.TypeReferences;
+import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.DyeColor;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Util;
@@ -116,7 +117,7 @@ public class BlockRegistry {
     public static Block BONES = Registry.register(
             Registry.BLOCK,
             new Identifier("slendermod", "bones"),
-            new BonesBlock(AbstractBlock.Settings.copy(Blocks.BONE_BLOCK).noCollision())
+            new BonesBlock(AbstractBlock.Settings.of(Material.STONE, MapColor.PALE_YELLOW).strength(2.0F).sounds(BlockSoundGroup.BONE).noCollision())
     );
 
     public static void Register() {
