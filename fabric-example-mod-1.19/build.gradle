@@ -18,15 +18,11 @@ repositories {
 	// for more information about repositories.
     maven { url 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/' }
 	
-	// vram guild repo
-	maven {url "https://maven.vram.io"}
-	// cloth config / used by canvas dependencies
-	maven {url "https://maven.shedaniel.me/"}
 	// spruce ui / current ui library
 	maven {url "https://maven.gegy.dev"}
 	// mod menu
 	maven {url "https://maven.terraformersmc.com/releases/"}
-	
+
 	maven {
         name = 'Ladysnake Mods'
         url = 'https://ladysnake.jfrog.io/artifactory/mods'
@@ -52,12 +48,7 @@ dependencies {
 	// modImplementation "net.fabricmc.fabric-api:fabric-api-deprecated:${project.fabric_version}"
 	
 	modImplementation 'software.bernie.geckolib:geckolib-fabric-1.19:3.1.0'
-	
-	modCompileOnly "io.vram:canvas-fabric-mc119:1.0.+"
 
-	// optional for testing in dev environment
-	modRuntimeOnly "io.vram:canvas-fabric-mc119:1.0.+"
-	
 	modImplementation "io.github.ladysnake:satin:1.9.0"
 }
 
