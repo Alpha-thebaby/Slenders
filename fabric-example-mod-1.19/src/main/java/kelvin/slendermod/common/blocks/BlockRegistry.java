@@ -132,6 +132,18 @@ public class BlockRegistry {
             new ManholeCoverBlock(AbstractBlock.Settings.copy(Blocks.IRON_TRAPDOOR))
     );
 
+    public static Block ACCESS_READER = Registry.register(
+            Registry.BLOCK,
+            new Identifier("slendermod", "access_reader"),
+            new AccessReaderBlock(AbstractBlock.Settings.copy(Blocks.STONE))
+    );
+
+    public static BlockEntityType<AccessReaderBlockEntity> ACCESS_READER_ENTITY = Registry.register(
+            Registry.BLOCK_ENTITY_TYPE,
+            "slendermod:access_reader",
+            BlockEntityType.Builder.create(AccessReaderBlockEntity::new, ACCESS_READER).build(Util.getChoiceType(TypeReferences.BLOCK_ENTITY, "slendermod:access_reader"))
+    );
+
     public static void Register() {
 
     }

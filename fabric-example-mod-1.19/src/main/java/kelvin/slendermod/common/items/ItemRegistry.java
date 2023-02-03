@@ -148,6 +148,12 @@ public class ItemRegistry {
             new BlockItem(BlockRegistry.MANHOLE_COVER, new Item.Settings().group(ItemGroup.DECORATIONS))
     );
 
+    public static BlockItem ACCESS_READER = Registry.register(
+            Registry.ITEM,
+            new Identifier("slendermod", "access_reader"),
+            new BlockItem(BlockRegistry.ACCESS_READER, new Item.Settings().group(ItemGroup.DECORATIONS))
+    );
+
     public static void Register() {
 
     }
