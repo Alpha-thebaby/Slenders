@@ -39,6 +39,17 @@ public abstract class PillarBlockMixin extends Block implements BlockEntityProvi
         return null;
     }
 
+    @Override
+    public void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
+        if (state != newState) {
+            BlockEntity blockEntity = world.getBlockEntity(pos);
+            if (blockEntity instanceof FroglightBlockEntity froglightBlockEntity) {
+                froglightBlockEntity.onRemoved();
+            }
+            super.onStateReplaced(state, world, pos, newState, moved);
+        }
+    }
+
     private <E extends BlockEntity, A extends BlockEntity> BlockEntityTicker<A> checkType(BlockEntityType<A> givenType, BlockEntityType<E> expectedType, BlockEntityTicker<E> ticker) {
         return expectedType == givenType ? (BlockEntityTicker<A>) ticker : null;
     }
