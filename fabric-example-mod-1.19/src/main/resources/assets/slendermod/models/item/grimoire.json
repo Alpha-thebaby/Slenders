@@ -7,8 +7,7 @@
 		"6": "slendermod:item/magazine",
 		"7": "slendermod:item/item_frame",
 		"8": "slendermod:item/oil",
-		"9": "slendermod:item/eye2",
-		"particle": "item_frame"
+		"9": "slendermod:item/eye2"
 	},
 	"elements": [
 		{
