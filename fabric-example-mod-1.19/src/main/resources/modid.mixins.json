@@ -8,7 +8,8 @@
     "PillarBlockMixin",
     "PlayerEntityMixin",
     "PlayerScreenHandlerMixin",
-    "ServerPlayerEntityMixin"
+    "ServerPlayerEntityMixin",
+    "SpawnSettingsMixin"
   ],
   "client": [
     "ClientPlayerEntityMixin",
