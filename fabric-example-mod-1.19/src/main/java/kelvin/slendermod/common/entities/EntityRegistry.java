@@ -47,6 +47,6 @@ public class EntityRegistry {
         SpawnRestriction.register(slender, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, (type, world, spawnReason, pos, random) ->
                 world.getDifficulty() != Difficulty.PEACEFUL && world.getBlockState(pos.down()).allowsSpawning(world, pos, type));
 
-        BiomeModifications.addSpawn(context -> context.hasTag(BiomeTags.IS_OVERWORLD) || context.hasTag(BiomeTags.IS_NETHER) || context.hasTag(BiomeTags.IS_END), SpawnGroup.CREATURE, slender, 25, 1, 3);
+        BiomeModifications.addSpawn(context -> context.hasTag(BiomeTags.IS_OVERWORLD) || context.hasTag(BiomeTags.IS_NETHER) || context.hasTag(BiomeTags.IS_END), SpawnGroup.CREATURE, slender, 37, 1, 3);
     }
 }
