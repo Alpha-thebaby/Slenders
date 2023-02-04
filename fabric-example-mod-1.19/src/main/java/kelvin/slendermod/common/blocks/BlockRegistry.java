@@ -81,25 +81,25 @@ public class BlockRegistry {
     public static BlockEntityType<?> DEAD_TREE_ENTITY = Registry.register(
             Registry.BLOCK_ENTITY_TYPE,
             "slendermod:dead_tree",
-            BlockEntityType.Builder.create(DeadTreeBlockEntity::new, DEAD_TREE, SCRATCHED_DEAD_TREE).build(Util.getChoiceType(TypeReferences.BLOCK_ENTITY, "slendermod:dead_tree"))
+            BlockEntityType.Builder.create(DeadTreeBlockEntity::new, DEAD_TREE, SCRATCHED_DEAD_TREE).build(null)
     );
 
     public static BlockEntityType<?> CAR_BODY_ENTITY = Registry.register(
             Registry.BLOCK_ENTITY_TYPE,
             "slendermod:car_body",
-            BlockEntityType.Builder.create(CarBodyBlockEntity::new, CAR_BODY).build(Util.getChoiceType(TypeReferences.BLOCK_ENTITY, "slendermod:car_body"))
+            BlockEntityType.Builder.create(CarBodyBlockEntity::new, CAR_BODY).build(null)
     );
 
     public static BlockEntityType<?> TRASH_ENTITY = Registry.register(
             Registry.BLOCK_ENTITY_TYPE,
             "slendermod:trash",
-            BlockEntityType.Builder.create(TrashBlockEntity::new, TRASH).build(Util.getChoiceType(TypeReferences.BLOCK_ENTITY, "slendermod:trash"))
+            BlockEntityType.Builder.create(TrashBlockEntity::new, TRASH).build(null)
     );
 
     public static BlockEntityType<?> DEBRIS_ENTITY = Registry.register(
             Registry.BLOCK_ENTITY_TYPE,
             "slendermod:debris",
-            BlockEntityType.Builder.create(DebrisBlockEntity::new, DEBRIS).build(Util.getChoiceType(TypeReferences.BLOCK_ENTITY, "slendermod:debris"))
+            BlockEntityType.Builder.create(DebrisBlockEntity::new, DEBRIS).build(null)
     );
 
     public static BlockEntityType<FroglightBlockEntity> FROGLIGHT_ENTITY = Registry.register(
@@ -141,7 +141,7 @@ public class BlockRegistry {
     public static BlockEntityType<AccessReaderBlockEntity> ACCESS_READER_ENTITY = Registry.register(
             Registry.BLOCK_ENTITY_TYPE,
             "slendermod:access_reader",
-            BlockEntityType.Builder.create(AccessReaderBlockEntity::new, ACCESS_READER).build(Util.getChoiceType(TypeReferences.BLOCK_ENTITY, "slendermod:access_reader"))
+            BlockEntityType.Builder.create(AccessReaderBlockEntity::new, ACCESS_READER).build(null)
     );
 
     public static void Register() {
