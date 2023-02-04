@@ -102,12 +102,6 @@ public class BlockRegistry {
             BlockEntityType.Builder.create(DebrisBlockEntity::new, DEBRIS).build(null)
     );
 
-    public static BlockEntityType<FroglightBlockEntity> FROGLIGHT_ENTITY = Registry.register(
-            Registry.BLOCK_ENTITY_TYPE,
-            "slendermod:froglight",
-            BlockEntityType.Builder.create(FroglightBlockEntity::new, Blocks.OCHRE_FROGLIGHT, Blocks.VERDANT_FROGLIGHT, Blocks.PEARLESCENT_FROGLIGHT).build(Util.getChoiceType(TypeReferences.BLOCK_ENTITY, "slendermod:froglight"))
-    );
-
     public static Block BARBED_WIRE_FENCE = Registry.register(
             Registry.BLOCK,
             new Identifier("slendermod", "barbed_wire_fence"),
