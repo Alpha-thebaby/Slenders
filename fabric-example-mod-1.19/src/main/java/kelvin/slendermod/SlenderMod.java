@@ -2,8 +2,8 @@ package kelvin.slendermod;
 
 import kelvin.slendermod.client.rendering.RenderingRegistry;
 import kelvin.slendermod.common.blocks.BlockRegistry;
-import kelvin.slendermod.common.entities.EntitySlenderman;
 import kelvin.slendermod.common.entities.EntityRegistry;
+import kelvin.slendermod.common.entities.EntitySlenderman;
 import kelvin.slendermod.common.entities.EntitySmallSlender;
 import kelvin.slendermod.common.items.ItemRegistry;
 import kelvin.slendermod.common.sounds.SoundRegistry;
@@ -15,31 +15,27 @@ import ladysnake.satin.api.managed.ShaderEffectManager;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
-import net.minecraft.client.Keyboard;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gl.Framebuffer;
 import net.minecraft.client.gl.WindowFramebuffer;
-import net.minecraft.client.input.KeyboardInput;
 import net.minecraft.client.option.KeyBinding;
-import net.minecraft.client.render.Camera;
-import net.minecraft.client.render.Shader;
 import net.minecraft.client.sound.PositionedSoundInstance;
 import net.minecraft.client.sound.SoundInstance;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.vehicle.MinecartEntity;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Util;
-import net.minecraft.util.math.*;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.Quaternion;
+import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.Vec3f;
 import org.lwjgl.glfw.GLFW;
 import org.lwjgl.opengl.GL30;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.swing.text.JTextComponent;
-import java.util.Arrays;
 import java.util.Random;
 
 public class SlenderMod implements ModInitializer, ClientModInitializer {
@@ -61,6 +57,7 @@ public class SlenderMod implements ModInitializer, ClientModInitializer {
 	public static float iTime = 0;
 
 	public static KeyBinding crawlKey;
+	public static SoundInstance somethingApproachesInstance;
 
 	@Override
 	public void onInitialize() {
@@ -120,6 +117,10 @@ public class SlenderMod implements ModInitializer, ClientModInitializer {
 			}
 			if (breath_timer > 0) {
 				breath_timer--;
+			}
+
+			if (scared_timer <= 0) {
+				client.getSoundManager().stop(somethingApproachesInstance);
 			}
 		});
 
@@ -209,7 +210,7 @@ public class SlenderMod implements ModInitializer, ClientModInitializer {
 		}
 		if (scare_music <= 0) {
 			scare_music = 20 * 60 * 2.5f;
-			playPositionlessSound(minecraft, x, y, z, SoundRegistry.SOMETHING_APPROACHES, SoundCategory.AMBIENT, 1.0f, new Random().nextFloat() * 0.5f - 0.25f + 1.0f);
+			somethingApproachesInstance = playPositionlessSound(minecraft, x, y, z, SoundRegistry.SOMETHING_APPROACHES, SoundCategory.AMBIENT, 1.0f, new Random().nextFloat() * 0.5f - 0.25f + 1.0f);
 		}
 		scared_timer = 10;
 		fear_zoom = MathHelper.lerp(0.5f, fear_zoom, 2.0f);
@@ -236,8 +237,9 @@ public class SlenderMod implements ModInitializer, ClientModInitializer {
 		return false;
 	}
 
-	public static void playPositionlessSound(MinecraftClient minecraft, double x, double y, double z, SoundEvent event, SoundCategory category, float volume, float pitch) {
+	public static SoundInstance playPositionlessSound(MinecraftClient minecraft, double x, double y, double z, SoundEvent event, SoundCategory category, float volume, float pitch) {
 		PositionedSoundInstance positionedSoundInstance = new PositionedSoundInstance(event.getId(), category, volume, pitch, minecraft.world.random, false, 0, SoundInstance.AttenuationType.NONE, x, y, z, false);
 		minecraft.getSoundManager().play(positionedSoundInstance);
+		return positionedSoundInstance;
 	}
 }
