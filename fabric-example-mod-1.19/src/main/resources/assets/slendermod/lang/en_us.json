@@ -30,5 +30,15 @@
   "entity.slendermod.small_slender": "Small Slenderman",
   "entity.slendermod.slender_boss": "Slenderman Boss",
 
-  "slendermod.something_roars": "Something Roars"
+  "subtitle.slendermod.something_roars": "Something Roars",
+  "subtitle.slendermod.something_growls": "Something Growls",
+  "subtitle.slendermod.something_small_laughs": "Something Small Laughs",
+  "subtitle.slendermod.something_small_roars": "Something Small Roars",
+  "subtitle.slendermod.shock": "Shock",
+  "subtitle.slendermod.shock_far": "Shock",
+  "subtitle.slendermod.player_breathing": "Player Breathing",
+  "subtitle.slendermod.player_heartbeat": "Player Heartbeat",
+  "subtitle.slendermod.something_approaches": "Something Approaches",
+  "subtitle.slendermod.wind": "Wind",
+  "subtitle.slendermod.froglight_buzzing": "Froglight Buzzing"
 }
