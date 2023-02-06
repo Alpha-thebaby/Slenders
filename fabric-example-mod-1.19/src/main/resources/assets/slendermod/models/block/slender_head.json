@@ -2,8 +2,8 @@
 	"credit": "Made with Blockbench",
 	"texture_size": [128, 128],
 	"textures": {
-		"0": "slendermod:entities/slenderman",
-		"particle": "slendermod:entities/slenderman"
+		"0": "slendermod:block/slenderman_head",
+		"particle": "slendermod:block/slenderman_head"
 	},
 	"elements": [
 		{
