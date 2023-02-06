@@ -1,43 +1,43 @@
 package kelvin.slendermod.client.rendering.blocks.models;
 
 import kelvin.slendermod.common.blocks.CustomFacingBlock;
-import kelvin.slendermod.common.blocks.DeadTreeBlock;
-import kelvin.slendermod.common.blocks.entities.CarBodyBlockEntity;
 import kelvin.slendermod.common.blocks.entities.DeadTreeBlockEntity;
+import net.minecraft.client.render.RenderLayer;
+import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.Quaternion;
-import net.minecraft.util.math.Vec3f;
-import software.bernie.geckolib3.model.AnimatedGeoModel;
-import software.bernie.geckolib3.renderers.geo.GeoBlockRenderer;
+import net.minecraft.util.math.RotationAxis;
+import software.bernie.geckolib.cache.object.BakedGeoModel;
+import software.bernie.geckolib.renderer.GeoBlockRenderer;
 
 public class RenderDeadTree extends GeoBlockRenderer<DeadTreeBlockEntity> {
+
     public RenderDeadTree() {
         super(new ModelDeadTree());
     }
 
     @Override
-    public void render(DeadTreeBlockEntity tile, float partialTicks, MatrixStack stack, VertexConsumerProvider bufferIn, int packedLightIn) {
-        stack.push();
+    public void actuallyRender(MatrixStack poseStack, DeadTreeBlockEntity animatable, BakedGeoModel model, RenderLayer renderType, VertexConsumerProvider bufferSource, VertexConsumer buffer, boolean isReRender, float partialTick, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
+        poseStack.push();
 
-        var facing = tile.getCachedState().get(CustomFacingBlock.FACING);
+        var facing = animatable.getCachedState().get(CustomFacingBlock.FACING);
 
-        stack.translate(0.5f, 0, 0.5f);
+        poseStack.translate(0.5f, 0, 0.5f);
 
         if (facing == Direction.NORTH) {
-            stack.multiply(Quaternion.fromEulerXyzDegrees(new Vec3f(0, 270, 0)));
+            poseStack.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(270));
         } else if (facing == Direction.EAST) {
-            stack.multiply(Quaternion.fromEulerXyzDegrees(new Vec3f(0, 0, 0)));
+            poseStack.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(0));
         } else if (facing == Direction.SOUTH) {
-            stack.multiply(Quaternion.fromEulerXyzDegrees(new Vec3f(0, 90, 0)));
+            poseStack.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(90));
         } if (facing == Direction.WEST) {
-            stack.multiply(Quaternion.fromEulerXyzDegrees(new Vec3f(0, 180, 0)));
+            poseStack.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(180));
         }
 
-        stack.translate(-0.5f, 0, -0.5f);
+        poseStack.translate(-0.5f, 0, -0.5f);
 
-        super.render(tile, partialTicks, stack, bufferIn, packedLightIn);
-        stack.pop();
+        super.actuallyRender(poseStack, animatable, model, renderType, bufferSource, buffer, isReRender, partialTick, packedLight, packedOverlay, red, green, blue, alpha);
+        poseStack.pop();
     }
 }

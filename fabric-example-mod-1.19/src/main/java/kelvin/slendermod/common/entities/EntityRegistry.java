@@ -8,27 +8,28 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
 import net.minecraft.entity.SpawnRestriction;
 import net.minecraft.entity.mob.MobEntity;
-import net.minecraft.tag.BiomeTags;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
+import net.minecraft.registry.tag.BiomeTags;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.Heightmap;
 
 public class EntityRegistry {
     public static EntityType<EntitySlenderman> SLENDERMAN = Registry.register(
-            Registry.ENTITY_TYPE,
+            Registries.ENTITY_TYPE,
             new Identifier("slendermod", "slenderman"),
             FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, EntitySlenderman::new).dimensions(EntityDimensions.fixed(0.75f, 2.9f)).build()
     );
 
     public static EntityType<EntitySmallSlender> SMALL_SLENDER = Registry.register(
-            Registry.ENTITY_TYPE,
+            Registries.ENTITY_TYPE,
             new Identifier("slendermod", "small_slender"),
             FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, EntitySmallSlender::new).dimensions(EntityDimensions.fixed(0.75f, 1.5f)).build()
     );
 
     public static EntityType<EntitySlenderBoss> SLENDER_BOSS = Registry.register(
-            Registry.ENTITY_TYPE,
+            Registries.ENTITY_TYPE,
             new Identifier("slendermod", "slender_boss"),
             FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, EntitySlenderBoss::new).dimensions(EntityDimensions.fixed(2, 4)).build()
     );

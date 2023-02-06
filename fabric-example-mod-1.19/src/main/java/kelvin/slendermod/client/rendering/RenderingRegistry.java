@@ -30,9 +30,9 @@ public class RenderingRegistry {
         BlockRenderLayerMap.INSTANCE.putBlock(BlockRegistry.BONES, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(BlockRegistry.HOSPITAL_BED, RenderLayer.getTranslucent());
 
-        BlockEntityRendererRegistry.register(BlockRegistry.DEAD_TREE_ENTITY, (BlockEntityRendererFactory.Context rendererDispatcherIn) -> new RenderDeadTree());
-        BlockEntityRendererRegistry.register(BlockRegistry.CAR_BODY_ENTITY, (BlockEntityRendererFactory.Context rendererDispatcherIn) -> new RenderCarBody());
-        BlockEntityRendererRegistry.register(BlockRegistry.TRASH_ENTITY, (BlockEntityRendererFactory.Context rendererDispatcherIn) -> new RenderTrash());
-        BlockEntityRendererRegistry.register(BlockRegistry.DEBRIS_ENTITY, (BlockEntityRendererFactory.Context rendererDispatcherIn) -> new RenderDebris());
+        BlockEntityRendererFactories.register(BlockRegistry.DEAD_TREE_ENTITY, ctx -> new RenderDeadTree());
+        BlockEntityRendererFactories.register(BlockRegistry.CAR_BODY_ENTITY, ctx -> new RenderCarBody());
+        BlockEntityRendererFactories.register(BlockRegistry.TRASH_ENTITY, ctx -> new RenderTrash());
+        BlockEntityRendererFactories.register(BlockRegistry.DEBRIS_ENTITY, ctx -> new RenderDebris());
     }
 }

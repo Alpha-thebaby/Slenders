@@ -11,31 +11,28 @@ import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.mob.PathAwareEntity;
-import net.minecraft.entity.mob.ZombieEntity;
-import net.minecraft.entity.passive.IronGolemEntity;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.LightType;
 import net.minecraft.world.World;
-import software.bernie.geckolib3.core.IAnimatable;
-import software.bernie.geckolib3.core.PlayState;
-import software.bernie.geckolib3.core.builder.AnimationBuilder;
-import software.bernie.geckolib3.core.controller.AnimationController;
-import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
-import software.bernie.geckolib3.core.manager.AnimationData;
-import software.bernie.geckolib3.core.manager.AnimationFactory;
+import software.bernie.geckolib.animatable.GeoEntity;
+import software.bernie.geckolib.core.animatable.GeoAnimatable;
+import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.core.animation.*;
+import software.bernie.geckolib.core.object.PlayState;
+import software.bernie.geckolib.util.GeckoLibUtil;
 
-public class EntitySlenderman extends PathAwareEntity implements IAnimatable {
-    private AnimationFactory factory = new AnimationFactory(this);
+public class EntitySlenderman extends PathAwareEntity implements GeoEntity {
+    private AnimatableInstanceCache factory = GeckoLibUtil.createInstanceCache(this);
 
-    private AnimationBuilder anim_idle = new AnimationBuilder().addAnimation("animation.idle", true);
-    private AnimationBuilder anim_walk = new AnimationBuilder().addAnimation("animation.walk", true);
-    private AnimationBuilder anim_roar = new AnimationBuilder().addAnimation("animation.roar", false);
-    private AnimationBuilder anim_running = new AnimationBuilder().addAnimation("animation.running", true);
-    private AnimationBuilder anim_look = new AnimationBuilder().addAnimation("animation.look", true);
-    private AnimationBuilder anim_attack = new AnimationBuilder().addAnimation("animation.attack", false);
+    private static final RawAnimation ANIM_IDLE = RawAnimation.begin().then("animation.walk", Animation.LoopType.LOOP);
+    private static final RawAnimation ANIM_WALK = RawAnimation.begin().then("animation.walk", Animation.LoopType.LOOP);
+    private static final RawAnimation ANIM_ROAR = RawAnimation.begin().then("animation.roar", Animation.LoopType.PLAY_ONCE);
+    private static final RawAnimation ANIM_RUNNING = RawAnimation.begin().then("animation.running", Animation.LoopType.LOOP);
+    private static final RawAnimation ANIM_LOOK = RawAnimation.begin().then("animation.look", Animation.LoopType.LOOP);
+    private static final RawAnimation ANIM_ATTACK = RawAnimation.begin().then("animation.attack", Animation.LoopType.PLAY_ONCE);
 
-    private AnimationBuilder[] animations = {anim_idle, anim_walk, anim_roar, anim_running, anim_look, anim_attack };
+    private static final RawAnimation[] ANIMATIONS = {ANIM_IDLE, ANIM_WALK, ANIM_ROAR, ANIM_RUNNING, ANIM_LOOK, ANIM_ATTACK};
 
     private int ANIM_ID_IDLE = 0, ANIM_ID_WALK = 1, ANIM_ID_ROAR = 2, ANIM_ID_RUNNING = 3, ANIM_ID_LOOK = 4, ANIM_ID_ATTACK = 5;
 
@@ -379,19 +376,19 @@ public class EntitySlenderman extends PathAwareEntity implements IAnimatable {
         return closest;
     }
 
-    private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
-        event.getController().setAnimation(animations[dataTracker.get(CURRENT_ANIMATION).intValue()]);
-        event.getController().transitionLengthTicks = 0;
+    private <E extends GeoAnimatable> PlayState predicate(AnimationState<E> event) {
+        event.getController().setAnimation(ANIMATIONS[dataTracker.get(CURRENT_ANIMATION).intValue()]);
+        event.getController().setTransitionLength(0);
         return PlayState.CONTINUE;
     }
 
     @Override
-    public void registerControllers(AnimationData data) {
-        data.addAnimationController(new AnimationController<EntitySlenderman>(this, "controller", 0, this::predicate));
+    public void registerControllers(AnimatableManager.ControllerRegistrar data) {
+        data.add(new AnimationController<>(this, "controller", 0, this::predicate));
     }
 
     @Override
-    public AnimationFactory getFactory() {
+    public AnimatableInstanceCache getAnimatableInstanceCache() {
         return this.factory;
     }
 }

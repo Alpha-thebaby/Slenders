@@ -1,47 +1,39 @@
 package kelvin.slendermod.common.entities;
 
-import kelvin.slendermod.common.sounds.SoundRegistry;
-import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MovementType;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
-import net.minecraft.entity.boss.dragon.EnderDragonEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.mob.PathAwareEntity;
-import net.minecraft.entity.passive.HorseEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.vehicle.BoatEntity;
 import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.sound.SoundCategory;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.world.LightType;
 import net.minecraft.world.World;
-import software.bernie.geckolib3.core.IAnimatable;
-import software.bernie.geckolib3.core.PlayState;
-import software.bernie.geckolib3.core.builder.AnimationBuilder;
-import software.bernie.geckolib3.core.controller.AnimationController;
-import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
-import software.bernie.geckolib3.core.manager.AnimationData;
-import software.bernie.geckolib3.core.manager.AnimationFactory;
+import software.bernie.geckolib.animatable.GeoEntity;
+import software.bernie.geckolib.core.animatable.GeoAnimatable;
+import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.core.animation.*;
+import software.bernie.geckolib.core.object.PlayState;
+import software.bernie.geckolib.util.GeckoLibUtil;
 
-public class EntitySlenderBoss extends PathAwareEntity implements IAnimatable {
-    private AnimationFactory factory = new AnimationFactory(this);
+public class EntitySlenderBoss extends PathAwareEntity implements GeoEntity {
+    private AnimatableInstanceCache factory = GeckoLibUtil.createInstanceCache(this);
 
-    private AnimationBuilder anim_idle = new AnimationBuilder().addAnimation("animation.slender_boss.idle", true);
-    private AnimationBuilder anim_walk = new AnimationBuilder().addAnimation("animation.slender_boss.crawl", true);
-    private AnimationBuilder anim_attack = new AnimationBuilder().addAnimation("animation.slender_boss.attack", false);
-    private AnimationBuilder anim_dash = new AnimationBuilder().addAnimation("animation.slender_boss.dash", false);
+    private static final RawAnimation ANIM_IDLE = RawAnimation.begin().then("animation.slender_boss.idle", Animation.LoopType.LOOP);
+    private static final RawAnimation ANIM_WALK = RawAnimation.begin().then("animation.slender_boss.crawl", Animation.LoopType.LOOP);
+    private static final RawAnimation ANIM_ATTACK = RawAnimation.begin().then("animation.slender_boss.attack", Animation.LoopType.PLAY_ONCE);
+    private static final RawAnimation ANIM_DASH = RawAnimation.begin().then("animation.slender_boss.dash", Animation.LoopType.PLAY_ONCE);
 
-    private AnimationBuilder[] animations = {anim_idle, anim_walk, anim_attack, anim_dash };
+    private static final RawAnimation[] ANIMATIONS = {ANIM_IDLE, ANIM_WALK, ANIM_ATTACK, ANIM_DASH};
 
     private int ANIM_ID_IDLE = 0, ANIM_ID_WALK = 1, ANIM_ID_ATTACK = 2, ANIM_ID_DASH = 3;
 
@@ -225,19 +217,19 @@ public class EntitySlenderBoss extends PathAwareEntity implements IAnimatable {
         }
     }
 
-    private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
-        event.getController().setAnimation(animations[dataTracker.get(CURRENT_ANIMATION).intValue()]);
-        event.getController().transitionLengthTicks = 5;
+    private <E extends GeoAnimatable> PlayState predicate(AnimationState<E> event) {
+        event.getController().setAnimation(ANIMATIONS[dataTracker.get(CURRENT_ANIMATION).intValue()]);
+        event.getController().setTransitionLength(5);
         return PlayState.CONTINUE;
     }
 
     @Override
-    public void registerControllers(AnimationData data) {
-        data.addAnimationController(new AnimationController<EntitySlenderBoss>(this, "controller", 0, this::predicate));
+    public void registerControllers(AnimatableManager.ControllerRegistrar data) {
+        data.add(new AnimationController<>(this, "controller", 0, this::predicate));
     }
 
     @Override
-    public AnimationFactory getFactory() {
+    public AnimatableInstanceCache getAnimatableInstanceCache() {
         return this.factory;
     }
 }

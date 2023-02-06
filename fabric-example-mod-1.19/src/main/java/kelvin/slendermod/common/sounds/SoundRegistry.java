@@ -1,26 +1,25 @@
 package kelvin.slendermod.common.sounds;
 
 import kelvin.slendermod.SlenderMod;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.sound.Sound;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
 
 public class SoundRegistry {
 
     public static SoundEvent RegisterSoundEvent(String location, float distance) {
         var id = new Identifier(SlenderMod.MODID, location);
-        var sound = new SoundEvent(id, distance);
-        Registry.register(Registry.SOUND_EVENT, id, sound);
+        var sound = SoundEvent.of(id, distance);
+        Registry.register(Registries.SOUND_EVENT, id, sound);
         return sound;
     }
 
     public static SoundEvent RegisterSoundEvent(String location) {
         var id = new Identifier(SlenderMod.MODID, location);
 
-        var sound = new SoundEvent(id);
-        Registry.register(Registry.SOUND_EVENT, id, sound);
+        var sound = SoundEvent.of(id);
+        Registry.register(Registries.SOUND_EVENT, id, sound);
         return sound;
     }
 

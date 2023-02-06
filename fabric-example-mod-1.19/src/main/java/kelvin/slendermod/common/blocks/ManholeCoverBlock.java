@@ -4,6 +4,7 @@ import net.minecraft.block.*;
 import net.minecraft.block.enums.BlockHalf;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.Fluids;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
@@ -23,7 +24,7 @@ public class ManholeCoverBlock extends TrapdoorBlock {
     public static final VoxelShape OPEN_TOP_SHAPE = Block.createCuboidShape(0.0, 13.0, 0.0, 16.0, 14.0, 16.0);
 
     public ManholeCoverBlock(Settings settings) {
-        super(settings);
+        super(settings, SoundEvents.BLOCK_IRON_DOOR_CLOSE, SoundEvents.BLOCK_IRON_DOOR_OPEN);
     }
 
     @Override
@@ -46,7 +47,7 @@ public class ManholeCoverBlock extends TrapdoorBlock {
         state = state.cycle(OPEN);
         world.setBlockState(pos, state, 2);
         if (state.get(WATERLOGGED)) {
-            world.createAndScheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
+            world.scheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
         }
 
         this.playToggleSound(player, world, pos, state.get(OPEN));

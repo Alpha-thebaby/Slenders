@@ -1,12 +1,11 @@
 package kelvin.slendermod.client.rendering.blocks.models;
 
 import kelvin.slendermod.SlenderMod;
-import kelvin.slendermod.common.blocks.entities.CarBodyBlockEntity;
 import kelvin.slendermod.common.blocks.entities.TrashBlockEntity;
 import net.minecraft.util.Identifier;
-import software.bernie.geckolib3.model.AnimatedGeoModel;
+import software.bernie.geckolib.model.GeoModel;
 
-public class ModelTrash extends AnimatedGeoModel<TrashBlockEntity> {
+public class ModelTrash extends GeoModel<TrashBlockEntity> {
     @Override
     public Identifier getModelResource(TrashBlockEntity object) {
         return new Identifier(SlenderMod.MODID, "geo/trash.geo.json");

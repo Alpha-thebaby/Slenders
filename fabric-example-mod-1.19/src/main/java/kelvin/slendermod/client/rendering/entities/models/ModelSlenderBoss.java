@@ -2,10 +2,11 @@ package kelvin.slendermod.client.rendering.entities.models;
 
 import kelvin.slendermod.SlenderMod;
 import kelvin.slendermod.common.entities.EntitySlenderBoss;
+import net.minecraft.client.render.RenderLayer;
 import net.minecraft.util.Identifier;
-import software.bernie.geckolib3.model.AnimatedGeoModel;
+import software.bernie.geckolib.model.GeoModel;
 
-public class ModelSlenderBoss extends AnimatedGeoModel<EntitySlenderBoss>
+public class ModelSlenderBoss extends GeoModel<EntitySlenderBoss>
 {
 
     @Override
@@ -21,5 +22,10 @@ public class ModelSlenderBoss extends AnimatedGeoModel<EntitySlenderBoss>
     @Override
     public Identifier getAnimationResource(EntitySlenderBoss animatable) {
         return new Identifier(SlenderMod.MODID, "animations/slender_boss.animation.json");
+    }
+
+    @Override
+    public RenderLayer getRenderType(EntitySlenderBoss animatable, Identifier texture) {
+        return RenderLayer.getEntityCutoutNoCull(texture);
     }
 }

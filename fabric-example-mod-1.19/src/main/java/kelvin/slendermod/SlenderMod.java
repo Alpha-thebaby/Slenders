@@ -28,9 +28,9 @@ import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Util;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.Quaternion;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.util.math.Vec3f;
+import org.joml.Quaternionf;
+import org.joml.Vector3f;
 import org.lwjgl.glfw.GLFW;
 import org.lwjgl.opengl.GL30;
 import org.slf4j.Logger;
@@ -223,11 +223,11 @@ public class SlenderMod implements ModInitializer, ClientModInitializer {
 		Entity camera = minecraft.getCameraEntity();
 		if (camera != null) {
 			if (camera instanceof PlayerEntity) {
-				Quaternion quat = minecraft.gameRenderer.getCamera().getRotation();
-				Vec3f vec = new Vec3f(0, 0, 1);
+				Quaternionf quat = minecraft.gameRenderer.getCamera().getRotation();
+				Vector3f vec = new Vector3f(0, 0, 1);
 				vec.rotate(quat);
 
-				Vec3d lookVec = new Vec3d(vec.getX(), vec.getY(), vec.getZ()).normalize();
+				Vec3d lookVec = new Vec3d(vec.x(), vec.y(), vec.z()).normalize();
 
 				Vec3d direction = entity.getPos().subtract(camera.getPos()).normalize();
 

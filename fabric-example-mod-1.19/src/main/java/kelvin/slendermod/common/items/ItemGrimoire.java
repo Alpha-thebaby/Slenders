@@ -22,7 +22,7 @@ import java.util.Optional;
 public class ItemGrimoire extends WrittenBookItem {
 
     public ItemGrimoire() {
-        super(new Settings().group(ItemGroup.MISC));
+        super(new Settings());
     }
 
     @Override
