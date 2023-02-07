@@ -15,6 +15,7 @@ import ladysnake.satin.api.managed.ShaderEffectManager;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
+import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gl.Framebuffer;
 import net.minecraft.client.gl.WindowFramebuffer;
@@ -23,6 +24,9 @@ import net.minecraft.client.sound.PositionedSoundInstance;
 import net.minecraft.client.sound.SoundInstance;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemGroup;
+import net.minecraft.item.ItemStack;
+import net.minecraft.registry.Registries;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Identifier;
@@ -41,6 +45,13 @@ import java.util.Random;
 public class SlenderMod implements ModInitializer, ClientModInitializer {
 	public static final String MODID = "slendermod";
 	public static final Logger LOGGER = LoggerFactory.getLogger("slendermod");
+	public static final ItemGroup SLENDERMOD_TAB = FabricItemGroup.builder(new Identifier(MODID, "slendermod_tab"))
+			.icon(() -> new ItemStack(ItemRegistry.SLENDER_HEAD))
+			.entries((enabledFeatures, entries, operatorEnabled) -> {
+				Registries.ITEM.stream().filter(item -> Registries.ITEM.getId(item).getNamespace().equals(MODID)).forEach(item -> {
+					entries.add(item, ItemGroup.StackVisibility.PARENT_AND_SEARCH_TABS);
+				});
+			}).build();
 
 	private Framebuffer framebuffer;
 
