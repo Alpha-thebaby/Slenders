@@ -31,6 +31,18 @@ repositories {
             includeGroupByRegex 'io\\.github\\.onyxstudios.*'
         }
 	}
+
+	maven {
+		url "https://cursemaven.com"
+		content {
+			includeGroup "curse.maven"
+		}
+	}
+
+	maven {
+		name 'Gegy'
+		url 'https://maven.gegy.dev'
+	}
 }
 
 dependencies {
@@ -50,6 +62,10 @@ dependencies {
 	modImplementation 'software.bernie.geckolib:geckolib-fabric-1.19.3:4.0.3'
 
 	modImplementation "io.github.ladysnake:satin:1.10.0"
+
+	modImplementation "curse.maven:lambdynamiclights-393442:4257388"
+	modImplementation "curse.maven:modmenu-308702:4159524"
+	include modImplementation("dev.lambdaurora:spruceui:4.1.0+1.19.3")
 }
 
 processResources {

@@ -4,8 +4,9 @@
   "package": "kelvin.slendermod.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
-    "PillarBlockMixin",
+    "StaticItemLightSourceAccessor",
     "LivingEntityMixin",
+    "PillarBlockMixin",
     "PlayerEntityMixin",
     "PlayerScreenHandlerMixin",
     "ServerPlayerEntityMixin",
