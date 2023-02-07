@@ -137,35 +137,18 @@ public class SlenderMod implements ModInitializer, ClientModInitializer {
 
 		ShaderEffectRenderCallback.EVENT.register(tickDelta -> {
 			MinecraftClient minecraft = MinecraftClient.getInstance();
+			boolean isNear = false;
 
 			if (minecraft == null) {
 				return;
 			}
 
 			if (minecraft.world != null) {
-				minecraft.world.getEntities().forEach((entity) -> {
+				for (Entity entity : minecraft.world.getEntities()) {
 					if (entity instanceof EntitySlenderman || entity instanceof EntitySmallSlender) {
 						if (minecraft.player != null) {
 							if (minecraft.player.distanceTo(entity) <= 10) {
-								if (this.framebuffer == null) {
-									this.framebuffer = new WindowFramebuffer(minecraft.getWindow().getFramebufferWidth(), minecraft.getWindow().getFramebufferHeight());
-									this.framebuffer.setClearColor(0.0F, 0.0F, 0.0F, 0.0F);
-									this.framebuffer.clear(Util.getOperatingSystem() == Util.OperatingSystem.OSX);
-
-								}
-
-								if (minecraft.getFramebuffer().textureWidth != this.framebuffer.textureWidth ||
-										minecraft.getFramebuffer().textureHeight != this.framebuffer.textureHeight) {
-									this.framebuffer.resize(minecraft.getFramebuffer().textureWidth, minecraft.getFramebuffer().textureHeight, true);
-								}
-
-								motionBlurShader.setSamplerUniform("LastFrame", this.framebuffer);
-								motionBlurShader.setUniformValue("fright", fright_blur);
-								motionBlurShader.setUniformValue("fear_zoom", fear_zoom);
-								motionBlurShader.setUniformValue("iTime", iTime);
-								iTime += tickDelta;
-								motionBlurShader.render(tickDelta);
-								copyFrameBufferTexture(this.framebuffer.textureWidth, this.framebuffer.textureHeight, minecraft.getFramebuffer().fbo, minecraft.getFramebuffer().getColorAttachment(), this.framebuffer.fbo, this.framebuffer.getColorAttachment());
+								isNear = true;
 							}
 						}
 
@@ -173,7 +156,29 @@ public class SlenderMod implements ModInitializer, ClientModInitializer {
 							scare(minecraft);
 						}
 					}
-				});
+				}
+
+				if (isNear) {
+					if (this.framebuffer == null) {
+						this.framebuffer = new WindowFramebuffer(minecraft.getWindow().getFramebufferWidth(), minecraft.getWindow().getFramebufferHeight());
+						this.framebuffer.setClearColor(0.0F, 0.0F, 0.0F, 0.0F);
+						this.framebuffer.clear(Util.getOperatingSystem() == Util.OperatingSystem.OSX);
+
+					}
+
+					if (minecraft.getFramebuffer().textureWidth != this.framebuffer.textureWidth ||
+							minecraft.getFramebuffer().textureHeight != this.framebuffer.textureHeight) {
+						this.framebuffer.resize(minecraft.getFramebuffer().textureWidth, minecraft.getFramebuffer().textureHeight, true);
+					}
+
+					motionBlurShader.setSamplerUniform("LastFrame", this.framebuffer);
+					motionBlurShader.setUniformValue("fright", fright_blur);
+					motionBlurShader.setUniformValue("fear_zoom", fear_zoom);
+					motionBlurShader.setUniformValue("iTime", iTime);
+					iTime += tickDelta;
+					motionBlurShader.render(tickDelta);
+					copyFrameBufferTexture(this.framebuffer.textureWidth, this.framebuffer.textureHeight, minecraft.getFramebuffer().fbo, minecraft.getFramebuffer().getColorAttachment(), this.framebuffer.fbo, this.framebuffer.getColorAttachment());
+				}
 			}
 		});
 	}
