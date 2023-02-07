@@ -19,7 +19,7 @@ public class EntityRegistry {
     public static EntityType<EntitySlenderman> SLENDERMAN = Registry.register(
             Registries.ENTITY_TYPE,
             new Identifier("slendermod", "slenderman"),
-            FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, EntitySlenderman::new).dimensions(EntityDimensions.fixed(0.75f, 2.9f)).build()
+            FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, EntitySlenderman::new).dimensions(EntityDimensions.fixed(2f, 4f)).build()
     );
 
     public static EntityType<EntitySmallSlender> SMALL_SLENDER = Registry.register(
