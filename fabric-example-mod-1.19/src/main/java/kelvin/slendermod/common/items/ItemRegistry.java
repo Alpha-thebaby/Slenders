@@ -14,7 +14,7 @@ public class ItemRegistry {
     public static Item FLASHLIGHT = Registry.register(
             Registries.ITEM,
             new Identifier("slendermod", "flashlight"),
-            new ItemFlashlight(new Item.Settings())
+            new ItemFlashlight(new Item.Settings().maxCount(1))
     );
 
     public static Item BOSS_ATTACK = Registry.register(
