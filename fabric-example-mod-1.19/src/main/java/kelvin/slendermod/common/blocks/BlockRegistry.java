@@ -137,6 +137,18 @@ public class BlockRegistry {
             BlockEntityType.Builder.create(AccessReaderBlockEntity::new, ACCESS_READER).build(null)
     );
 
+    public static Block UFO_INTERIOR = Registry.register(
+            Registries.BLOCK,
+            new Identifier("slendermod", "ufo_interior"),
+            new UFOInteriorBlock(AbstractBlock.Settings.copy(Blocks.IRON_BLOCK).nonOpaque().noCollision())
+    );
+
+    public static BlockEntityType<UFOInteriorBlockEntity> UFO_INTERIOR_ENTITY = Registry.register(
+            Registries.BLOCK_ENTITY_TYPE,
+            "slendermod:ufo_interior",
+            BlockEntityType.Builder.create(UFOInteriorBlockEntity::new, UFO_INTERIOR).build(null)
+    );
+
     public static void Register() {
 
     }

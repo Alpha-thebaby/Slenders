@@ -155,6 +155,12 @@ public class ItemRegistry {
             new BlockItem(BlockRegistry.ACCESS_READER, new Item.Settings())
     );
 
+    public static BlockItem UFO_INTERIOR = Registry.register(
+            Registries.ITEM,
+            new Identifier("slendermod", "ufo_interior"),
+            new BlockItem(BlockRegistry.UFO_INTERIOR, new Item.Settings())
+    );
+
     public static void Register() {
 
     }

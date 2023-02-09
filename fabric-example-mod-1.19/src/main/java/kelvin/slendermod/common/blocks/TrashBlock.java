@@ -1,6 +1,5 @@
 package kelvin.slendermod.common.blocks;
 
-import kelvin.slendermod.common.blocks.entities.CarBodyBlockEntity;
 import kelvin.slendermod.common.blocks.entities.TrashBlockEntity;
 import net.minecraft.block.BlockEntityProvider;
 import net.minecraft.block.BlockRenderType;

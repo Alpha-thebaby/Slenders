@@ -1,6 +1,6 @@
 package kelvin.slendermod.common.blocks;
 
-import kelvin.slendermod.common.blocks.entities.DebrisBlockEntity;
+import kelvin.slendermod.common.blocks.entities.UFOInteriorBlockEntity;
 import net.minecraft.block.BlockEntityProvider;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
@@ -8,8 +8,8 @@ import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.util.math.BlockPos;
 import org.jetbrains.annotations.Nullable;
 
-public class DebrisBlock extends CustomFacingBlock implements BlockEntityProvider {
-    public DebrisBlock(Settings settings) {
+public class UFOInteriorBlock extends CustomFacingBlock implements BlockEntityProvider {
+    public UFOInteriorBlock(Settings settings) {
         super(settings);
     }
 
@@ -21,6 +21,6 @@ public class DebrisBlock extends CustomFacingBlock implements BlockEntityProvide
     @Nullable
     @Override
     public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
-        return new DebrisBlockEntity(pos, state);
+        return new UFOInteriorBlockEntity(pos, state);
     }
 }
