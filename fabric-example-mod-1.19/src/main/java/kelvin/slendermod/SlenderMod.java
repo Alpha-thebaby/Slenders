@@ -1,5 +1,6 @@
 package kelvin.slendermod;
 
+import fuzs.forgeconfigapiport.api.config.v2.ForgeConfigRegistry;
 import kelvin.slendermod.client.rendering.RenderingRegistry;
 import kelvin.slendermod.common.blocks.BlockRegistry;
 import kelvin.slendermod.common.entities.EntityRegistry;
@@ -33,6 +34,8 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.Util;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
+import net.minecraftforge.common.ForgeConfigSpec;
+import net.minecraftforge.fml.config.ModConfig;
 import org.joml.Quaternionf;
 import org.joml.Vector3f;
 import org.lwjgl.glfw.GLFW;
@@ -52,6 +55,7 @@ public class SlenderMod implements ModInitializer, ClientModInitializer {
 					entries.add(item, ItemGroup.StackVisibility.PARENT_AND_SEARCH_TABS);
 				});
 			}).build();
+	private static ForgeConfigSpec.BooleanValue ENABLE_SLENDER_EFFECTS;
 
 	private Framebuffer framebuffer;
 
@@ -77,6 +81,10 @@ public class SlenderMod implements ModInitializer, ClientModInitializer {
 		ItemRegistry.Register();
 
 		ServerPacketHandler.Start();
+
+		ForgeConfigSpec.Builder builder = new ForgeConfigSpec.Builder();
+		ENABLE_SLENDER_EFFECTS = builder.define("showGlitchEffects", true);
+		ForgeConfigRegistry.INSTANCE.register(MODID, ModConfig.Type.CLIENT, builder.build());
 	}
 
 
@@ -92,7 +100,7 @@ public class SlenderMod implements ModInitializer, ClientModInitializer {
 		SoundRegistry.Register();
 
 		ClientTickEvents.START_CLIENT_TICK.register((client) -> {
-			if (client.isPaused()) {
+			if (client.isPaused() || !ENABLE_SLENDER_EFFECTS.get()) {
 				return;
 			}
 
@@ -139,7 +147,7 @@ public class SlenderMod implements ModInitializer, ClientModInitializer {
 			MinecraftClient minecraft = MinecraftClient.getInstance();
 			boolean isNear = false;
 
-			if (minecraft == null) {
+			if (minecraft == null || !ENABLE_SLENDER_EFFECTS.get()) {
 				return;
 			}
 
@@ -224,7 +232,6 @@ public class SlenderMod implements ModInitializer, ClientModInitializer {
 		}
 		if (breath_timer <= 0) {
 			breath_timer = 20 * 60;
-			playPositionlessSound(minecraft, x, y, z, SoundRegistry.BREATHING, SoundCategory.AMBIENT, 1.0f, 1.0f);
 			playPositionlessSound(minecraft, x, y, z, SoundRegistry.WIND, SoundCategory.AMBIENT, 1.0f, 1.0f);
 		}
 		if (scare_music <= 0) {

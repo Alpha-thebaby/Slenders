@@ -43,6 +43,11 @@ repositories {
 		name 'Gegy'
 		url 'https://maven.gegy.dev'
 	}
+
+	maven {
+		name = "Fuzs Mod Resources"
+		url = "https://raw.githubusercontent.com/Fuzss/modresources/main/maven/"
+	}
 }
 
 dependencies {
@@ -66,6 +71,7 @@ dependencies {
 	modImplementation "curse.maven:lambdynamiclights-393442:4257388"
 	modImplementation "curse.maven:modmenu-308702:4159524"
 	include modImplementation("dev.lambdaurora:spruceui:4.1.0+1.19.3")
+	modImplementation("fuzs.forgeconfigapiport:forgeconfigapiport-fabric:5.0.7")
 }
 
 processResources {
