@@ -3,7 +3,7 @@
   "id": "slendermod",
   "version": "${version}",
   "name": "Slender Mod",
-  "description": "This is an example description! Tell everyone what your mod is about!",
+  "description": "A mod that replaces all natural mob spawning with slenders, a terrifying creature from another galaxy",
   "authors": [
     "Kelvin",
     "MincraftEinstein",
