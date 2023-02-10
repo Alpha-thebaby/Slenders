@@ -22,10 +22,10 @@ public class ItemBossDash extends Item {
         if (!world.isClient()) {
             if (user.hasVehicle()) {
                 var entity = user.getVehicle();
-                if (entity instanceof EntitySlenderBoss) {
-                    EntitySlenderBoss boss = (EntitySlenderBoss) entity;
+                if (entity instanceof EntitySlenderBoss boss) {
                     if (boss.GetState() == EntitySlenderBoss.STATE_DEFAULT) {
                         boss.SetState(EntitySlenderBoss.STATE_DASH);
+                        user.getItemCooldownManager().set(this, 30);
                     }
                 }
             }
