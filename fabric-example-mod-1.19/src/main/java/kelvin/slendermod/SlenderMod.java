@@ -28,12 +28,14 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Util;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.event.GameEvent;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.fml.config.ModConfig;
 import org.joml.Quaternionf;
@@ -55,6 +57,11 @@ public class SlenderMod implements ModInitializer, ClientModInitializer {
 					entries.add(item, ItemGroup.StackVisibility.PARENT_AND_SEARCH_TABS);
 				});
 			}).build();
+	public static final GameEvent SLENDER_ROAR = Registry.register(
+			Registries.GAME_EVENT,
+			"slender_roar",
+			new GameEvent("slender_roar", 64)
+	);
 	private static ForgeConfigSpec.BooleanValue ENABLE_SLENDER_EFFECTS;
 
 	private Framebuffer framebuffer;

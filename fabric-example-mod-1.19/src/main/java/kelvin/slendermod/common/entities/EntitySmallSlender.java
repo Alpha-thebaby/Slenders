@@ -1,6 +1,7 @@
 package kelvin.slendermod.common.entities;
 
 import kelvin.slendermod.common.sounds.SoundRegistry;
+import net.minecraft.block.Block;
 import net.minecraft.block.DoorBlock;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
@@ -16,14 +17,13 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.LightType;
 import net.minecraft.world.World;
-import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.GeoAnimatable;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.core.animation.*;
 import software.bernie.geckolib.core.object.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
-public class EntitySmallSlender extends PathAwareEntity implements GeoEntity {
+public class EntitySmallSlender extends EntitySlenderRoarListener {
     private AnimatableInstanceCache factory = GeckoLibUtil.createInstanceCache(this);
 
     private static final RawAnimation ANIM_IDLE = RawAnimation.begin().then("animation.idle", Animation.LoopType.LOOP);
@@ -79,6 +79,19 @@ public class EntitySmallSlender extends PathAwareEntity implements GeoEntity {
     @Override
     public void pushAwayFrom(Entity entity) {
 
+    }
+
+    @Override
+    public float getAnger() {
+        return anger;
+    }
+
+    @Override
+    protected void setChasing(BlockPos pos) {
+        changeState(CHASING);
+        time_in_state = 80;
+        anger_timer = 1;
+        lastSeenPos = pos.toCenterPos();
     }
 
     @Override
