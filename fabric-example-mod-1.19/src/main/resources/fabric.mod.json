@@ -2,20 +2,20 @@
   "schemaVersion": 1,
   "id": "slendermod",
   "version": "${version}",
-
-  "name": "Example Mod",
+  "name": "Slender Mod",
   "description": "This is an example description! Tell everyone what your mod is about!",
   "authors": [
-    "Me!"
+    "Kelvin",
+    "MincraftEinstein",
+    "DrAlpha"
   ],
   "contact": {
     "homepage": "https://fabricmc.net/",
-    "sources": "https://github.com/FabricMC/fabric-example-mod"
+    "sources": "https://github.com/Alpha-thebaby/Slenders",
+    "issues": "https://github.com/Alpha-thebaby/Slenders/issues"
   },
-
   "license": "CC0-1.0",
   "icon": "assets/slendermod/icon.png",
-
   "environment": "*",
   "entrypoints": {
     "main": [
@@ -29,16 +29,16 @@
     ]
   },
   "mixins": [
-    "modid.mixins.json"
+    "slendermod.mixins.json"
   ],
-
   "depends": {
     "fabricloader": ">=0.14.9",
     "fabric-api": "*",
     "minecraft": "~1.19",
-    "java": ">=17"
-  },
-  "suggests": {
-    "another-mod": "*"
+    "java": ">=17",
+    "lambdynlights": "2.2.0+1.19.3",
+    "forgeconfigapiport": "5.0.7",
+    "geckolib": "4.0.3",
+    "satin": "1.10.0"
   }
 }
