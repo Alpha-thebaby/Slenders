@@ -1,5 +1,6 @@
 package kelvin.slendermod.common.entities;
 
+import kelvin.slendermod.common.sounds.SoundRegistry;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MovementType;
@@ -13,6 +14,8 @@ import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.mob.PathAwareEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.sound.SoundEvent;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.Box;
@@ -160,6 +163,7 @@ public class EntitySlenderBoss extends PathAwareEntity implements GeoEntity {
                     motion_z = look_z * 3;
 
                     setVelocity(new Vec3d(motion_x, 0.25, motion_z));
+                    playSound(SoundRegistry.BOSS_DASH, 1, 1);
                 }
                 else if (timeInState > 5) {
                     transitionTicks = 10;

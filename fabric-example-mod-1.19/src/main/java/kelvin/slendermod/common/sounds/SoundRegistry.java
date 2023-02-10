@@ -33,6 +33,7 @@ public class SoundRegistry {
     public static SoundEvent SOMETHING_APPROACHES;
     public static SoundEvent WIND;
     public static SoundEvent BUZZING;
+    public static SoundEvent BOSS_DASH;
 
     public static void Register() {
         HORROR_ROAR = RegisterSoundEvent("horror_roar");
@@ -45,5 +46,6 @@ public class SoundRegistry {
         SOMETHING_APPROACHES = RegisterSoundEvent("something_approaches");
         WIND = RegisterSoundEvent("wind");
         BUZZING = RegisterSoundEvent("buzzing");
+        BOSS_DASH = RegisterSoundEvent("boss_dash");
     }
 }

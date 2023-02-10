@@ -73,5 +73,11 @@
     "sounds": [
       "slendermod:buzzing"
     ]
+  },
+  "boss_dash": {
+    "subtitle": "subtitle.slendermod.boss_dash",
+    "sounds": [
+      "slendermod:entity/slender_boss/slender_boss_dash"
+    ]
   }
 }
