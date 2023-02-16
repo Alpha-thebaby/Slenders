@@ -10,7 +10,6 @@
     "PlayerEntityMixin",
     "PlayerScreenHandlerMixin",
     "ServerPlayerEntityMixin",
-    "SpawnSettingsMixin"
   ],
   "client": [
     "ClientPlayerEntityMixin",
