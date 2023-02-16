@@ -21,6 +21,7 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.GeoAnimatable;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
@@ -81,6 +82,12 @@ public class EntitySlenderBoss extends PathAwareEntity implements GeoEntity {
         super.tick();
 
         if (!world.isClient()) {
+            if (world.getTime() % (100) == 0) {
+                if (GetState() != STATE_ATTACK || GetState() != STATE_DASH) {
+                    playSound(SoundRegistry.BOSS_IDLE, 1, 1);
+                }
+            }
+
             int animation = ANIM_ID_IDLE;
             if (STATE == STATE_DEFAULT) {
                 var first = getFirstPassenger();
@@ -118,9 +125,11 @@ public class EntitySlenderBoss extends PathAwareEntity implements GeoEntity {
                     }
                 }
             } else if (STATE == STATE_ATTACK) {
-
                 animation = ANIM_ID_ATTACK;
-                if (timeInState == 10) {
+                if (timeInState == 0) {
+                    playSound(SoundRegistry.BOSS_ATTACK, 1, 1);
+                }
+                else if (timeInState == 10) {
                     float yaw = -(float)Math.toRadians(getYaw());
 
                     float look_x = (float)Math.sin(yaw);

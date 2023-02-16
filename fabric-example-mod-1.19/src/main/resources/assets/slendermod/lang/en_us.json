@@ -43,5 +43,8 @@
   "subtitle.slendermod.player_heartbeat": "Player Heartbeat",
   "subtitle.slendermod.something_approaches": "Something Approaches",
   "subtitle.slendermod.wind": "Wind",
-  "subtitle.slendermod.froglight_buzzing": "Froglight Buzzing"
+  "subtitle.slendermod.froglight_buzzing": "Froglight Buzzing",
+  "subtitle.slendermod.boss_dash": "Slender Boss Dash",
+  "subtitle.slendermod.boss_attack": "Slender Boss Attack",
+  "subtitle.slendermod.boss_idle": "Slender Boss idle"
 }

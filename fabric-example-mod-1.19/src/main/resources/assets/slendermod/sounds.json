@@ -77,7 +77,40 @@
   "boss_dash": {
     "subtitle": "subtitle.slendermod.boss_dash",
     "sounds": [
-      "slendermod:entity/slender_boss/slender_boss_dash"
+      "slendermod:entity/slender_boss/dash1",
+      "slendermod:entity/slender_boss/dash2",
+      "slendermod:entity/slender_boss/dash3",
+      "slendermod:entity/slender_boss/dash4",
+      "slendermod:entity/slender_boss/dash5",
+      "slendermod:entity/slender_boss/dash6",
+      "slendermod:entity/slender_boss/dash7",
+      "slendermod:entity/slender_boss/dash8",
+      "slendermod:entity/slender_boss/dash9",
+      "slendermod:entity/slender_boss/dash10",
+      "slendermod:entity/slender_boss/dash11"
+    ]
+  },
+  "boss_attack": {
+    "subtitle": "subtitle.slendermod.boss_attack",
+    "sounds": [
+      "slendermod:entity/slender_boss/attack1",
+      "slendermod:entity/slender_boss/attack2",
+      "slendermod:entity/slender_boss/attack3",
+      "slendermod:entity/slender_boss/attack4",
+      "slendermod:entity/slender_boss/attack5",
+      "slendermod:entity/slender_boss/attack6"
+    ]
+  },
+  "boss_idle": {
+    "subtitle": "subtitle.slendermod.boss_idle",
+    "sounds": [
+      "slendermod:entity/slender_boss/idle1",
+      "slendermod:entity/slender_boss/idle2",
+      "slendermod:entity/slender_boss/idle3",
+      "slendermod:entity/slender_boss/idle4",
+      "slendermod:entity/slender_boss/idle5",
+      "slendermod:entity/slender_boss/idle6",
+      "slendermod:entity/slender_boss/idle7"
     ]
   }
 }
