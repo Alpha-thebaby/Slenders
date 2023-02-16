@@ -25,7 +25,7 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 public class EntitySlenderman extends EntitySlenderRoarListener {
     private AnimatableInstanceCache factory = GeckoLibUtil.createInstanceCache(this);
 
-    private static final RawAnimation ANIM_IDLE = RawAnimation.begin().then("animation.walk", Animation.LoopType.LOOP);
+    private static final RawAnimation ANIM_IDLE = RawAnimation.begin().then("animation.idle", Animation.LoopType.LOOP);
     private static final RawAnimation ANIM_WALK = RawAnimation.begin().then("animation.walk", Animation.LoopType.LOOP);
     private static final RawAnimation ANIM_ROAR = RawAnimation.begin().then("animation.roar", Animation.LoopType.PLAY_ONCE);
     private static final RawAnimation ANIM_RUNNING = RawAnimation.begin().then("animation.running", Animation.LoopType.LOOP);
