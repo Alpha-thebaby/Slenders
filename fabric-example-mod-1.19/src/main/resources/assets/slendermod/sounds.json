@@ -16,19 +16,55 @@
       "slendermod:entity/slenderman/growl3"
     ]
   },
-  "kid_laugh": {
-    "subtitle": "subtitle.slendermod.something_small_laughs",
+  "small_slender_looking": {
+    "subtitle": "subtitle.slendermod.small_slender_looking",
     "sounds": [
-      "slendermod:entity/slenderkid/laugh1",
-      "slendermod:entity/slenderkid/laugh2",
-      "slendermod:entity/slenderkid/laugh3"
+      "slendermod:entity/slenderkid/looking1",
+      "slendermod:entity/slenderkid/looking2",
+      "slendermod:entity/slenderkid/looking3",
+      "slendermod:entity/slenderkid/looking4",
+      "slendermod:entity/slenderkid/looking5",
+      "slendermod:entity/slenderkid/looking6",
+      "slendermod:entity/slenderkid/looking7",
+      "slendermod:entity/slenderkid/looking8",
+      "slendermod:entity/slenderkid/looking9",
+      "slendermod:entity/slenderkid/looking10",
+      "slendermod:entity/slenderkid/looking11",
+      "slendermod:entity/slenderkid/looking12",
+      "slendermod:entity/slenderkid/looking13",
+      "slendermod:entity/slenderkid/looking14",
+      "slendermod:entity/slenderkid/looking15",
+      "slendermod:entity/slenderkid/looking16",
+      "slendermod:entity/slenderkid/looking17",
+      "slendermod:entity/slenderkid/looking18",
+      "slendermod:entity/slenderkid/looking19",
+      "slendermod:entity/slenderkid/looking20",
+      "slendermod:entity/slenderkid/looking21",
+      "slendermod:entity/slenderkid/looking22",
+      "slendermod:entity/slenderkid/looking23",
+      "slendermod:entity/slenderkid/looking24",
+      "slendermod:entity/slenderkid/looking25",
+      "slendermod:entity/slenderkid/looking26",
+      "slendermod:entity/slenderkid/looking27",
+      "slendermod:entity/slenderkid/looking28",
+      "slendermod:entity/slenderkid/looking29",
+      "slendermod:entity/slenderkid/looking30"
     ]
   },
-  "kid_roar": {
-    "subtitle": "subtitle.slendermod.something_small_roars",
+  "small_slender_chasing": {
+    "subtitle": "subtitle.slendermod.small_slender_chasing",
     "sounds": [
-      "slendermod:entity/slenderkid/roar1",
-      "slendermod:entity/slenderkid/roar2"
+      "slendermod:entity/slenderkid/chasing1",
+      "slendermod:entity/slenderkid/chasing2",
+      "slendermod:entity/slenderkid/chasing3",
+      "slendermod:entity/slenderkid/chasing4",
+      "slendermod:entity/slenderkid/chasing5",
+      "slendermod:entity/slenderkid/chasing6",
+      "slendermod:entity/slenderkid/chasing7",
+      "slendermod:entity/slenderkid/chasing8",
+      "slendermod:entity/slenderkid/chasing9",
+      "slendermod:entity/slenderkid/chasing10",
+      "slendermod:entity/slenderkid/chasing11"
     ]
   },
   "shock": {

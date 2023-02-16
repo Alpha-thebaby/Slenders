@@ -25,8 +25,8 @@ public class SoundRegistry {
 
     public static SoundEvent HORROR_ROAR;
     public static SoundEvent HORROR_GROWL;
-    public static SoundEvent KID_LAUGH;
-    public static SoundEvent KID_ROAR;
+    public static SoundEvent SMALL_SLENDER_LOOKING;
+    public static SoundEvent SMALL_SLENDER_CHASING;
     public static SoundEvent SHOCK;
     public static SoundEvent BREATHING;
     public static SoundEvent HEARTBEAT;
@@ -40,8 +40,8 @@ public class SoundRegistry {
     public static void Register() {
         HORROR_ROAR = RegisterSoundEvent("horror_roar");
         HORROR_GROWL = RegisterSoundEvent("horror_growl");
-        KID_LAUGH = RegisterSoundEvent("kid_laugh");
-        KID_ROAR = RegisterSoundEvent("kid_roar");
+        SMALL_SLENDER_LOOKING = RegisterSoundEvent("small_slender_looking");
+        SMALL_SLENDER_CHASING = RegisterSoundEvent("small_slender_chasing");
         SHOCK = RegisterSoundEvent("shock");
         BREATHING = RegisterSoundEvent("breathing");
         HEARTBEAT = RegisterSoundEvent("heartbeat");

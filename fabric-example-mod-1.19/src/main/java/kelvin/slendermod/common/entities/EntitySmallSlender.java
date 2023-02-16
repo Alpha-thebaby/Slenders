@@ -1,7 +1,6 @@
 package kelvin.slendermod.common.entities;
 
 import kelvin.slendermod.common.sounds.SoundRegistry;
-import net.minecraft.block.Block;
 import net.minecraft.block.DoorBlock;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
@@ -12,11 +11,13 @@ import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.mob.PathAwareEntity;
 import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.LightType;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.core.animatable.GeoAnimatable;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.core.animation.*;
@@ -174,12 +175,9 @@ public class EntitySmallSlender extends EntitySlenderRoarListener {
 
                     break;
                 case CHASING:
-
                     float yaw = -(float)Math.toRadians(getYaw());
-
                     float look_x = (float)Math.sin(yaw);
                     float look_z = (float)Math.cos(yaw);
-
 
                     if (doorPos == null) {
                         BlockPos findDoorPos = new BlockPos(getX() + look_x, getY() + 0.5f, getZ() + look_z);
@@ -197,9 +195,6 @@ public class EntitySmallSlender extends EntitySlenderRoarListener {
                                     dataTracker.set(ROAR_TRACKER, true);
                                 }
                             } else {
-
-
-
                                 anger_timer = 20 * 10;
                                 setCurrentAnimation(ANIM_ID_RUNNING);
 
@@ -223,7 +218,6 @@ public class EntitySmallSlender extends EntitySlenderRoarListener {
                                         changeState(WANDERING);
                                     }
                                 }
-
                             }
                         }
                     } else {
@@ -285,10 +279,10 @@ public class EntitySmallSlender extends EntitySlenderRoarListener {
             }
         } else {
             if (dataTracker.get(GROWL_TRACKER).booleanValue()) {
-                world.playSound(getX(), getY(), getZ(), SoundRegistry.KID_LAUGH, SoundCategory.HOSTILE, 2.5f, (float)(random.nextDouble() - 0.5f) / 5.0f + 1.0f, true);
+//                world.playSound(getX(), getY(), getZ(), SoundRegistry.SMALL_SLENDER_LOOKING, SoundCategory.HOSTILE, 2.5f, (float)(random.nextDouble() - 0.5f) / 5.0f + 1.0f, true);
                 dataTracker.set(GROWL_TRACKER, false);
             } else if (dataTracker.get(ROAR_TRACKER).booleanValue()) {
-                world.playSound(getX(), getY(), getZ(), SoundRegistry.KID_ROAR, SoundCategory.HOSTILE, 2.0f, (float)(random.nextDouble() - 0.5f) / 5.0f + 1.0f, true);
+//                world.playSound(getX(), getY(), getZ(), SoundRegistry.SMALL_SLENDER_CHASING, SoundCategory.HOSTILE, 2.0f, (float)(random.nextDouble() - 0.5f) / 5.0f + 1.0f, true);
                 dataTracker.set(ROAR_TRACKER, false);
             }
         }
@@ -445,5 +439,17 @@ public class EntitySmallSlender extends EntitySlenderRoarListener {
     @Override
     public AnimatableInstanceCache getAnimatableInstanceCache() {
         return this.factory;
+    }
+
+    @Nullable
+    @Override
+    protected SoundEvent getAmbientSound() {
+        if (current_state == CHASING || current_state == ATTACKING) {
+            return SoundRegistry.SMALL_SLENDER_CHASING;
+        }
+        else if (current_state == LOOKING) {
+            return SoundRegistry.SMALL_SLENDER_LOOKING;
+        }
+        return super.getAmbientSound();
     }
 }
