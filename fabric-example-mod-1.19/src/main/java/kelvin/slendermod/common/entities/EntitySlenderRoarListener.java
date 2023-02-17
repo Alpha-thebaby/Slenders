@@ -35,7 +35,6 @@ public abstract class EntitySlenderRoarListener extends PathAwareEntity implemen
 
     private void travelToRoar(BlockPos pos) {
         if (getAnger() <= 0) {
-//            navigation.startMovingTo(pos.getX(), pos.getY(), pos.getZ(), 0.5f);
             setChasing(pos);
         }
     }
@@ -66,9 +65,11 @@ public abstract class EntitySlenderRoarListener extends PathAwareEntity implemen
 
         @Override
         public boolean listen(ServerWorld world, GameEvent event, GameEvent.Emitter emitter, Vec3d emitterPos) {
-            if (event == SlenderMod.SLENDER_ROAR) {
-                EntitySlenderRoarListener.this.travelToRoar(new BlockPos(emitterPos));
-                return true;
+            if (event == SlenderMod.SLENDER_ROAR && emitter.sourceEntity() != null) {
+                if (!emitter.sourceEntity().getUuid().equals(EntitySlenderRoarListener.this.getUuid())) {
+                    EntitySlenderRoarListener.this.travelToRoar(new BlockPos(emitterPos));
+                    return true;
+                }
             }
             return false;
         }
