@@ -10,7 +10,7 @@
     "PlayerEntityMixin",
     "PlayerScreenHandlerMixin",
     "ServerPlayerEntityMixin",
-    "StaticItemLightSourceMixin"
+    "LambDynLightsMixin"
   ],
   "client": [
     "ClientPlayerEntityMixin",

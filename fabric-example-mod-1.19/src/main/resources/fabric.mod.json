@@ -23,9 +23,6 @@
     ],
     "client": [
       "kelvin.slendermod.SlenderMod"
-    ],
-    "dynamiclights": [
-      "kelvin.slendermod.ModDynamicLights"
     ]
   },
   "mixins": [
