@@ -6,6 +6,7 @@ import kelvin.slendermod.common.blocks.BlockRegistry;
 import kelvin.slendermod.common.entities.EntityRegistry;
 import kelvin.slendermod.common.entities.EntitySlenderman;
 import kelvin.slendermod.common.entities.EntitySmallSlender;
+import kelvin.slendermod.common.items.ItemFlashlight;
 import kelvin.slendermod.common.items.ItemRegistry;
 import kelvin.slendermod.common.sounds.SoundRegistry;
 import kelvin.slendermod.network.client.ClientPacketHandler;
@@ -20,6 +21,7 @@ import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gl.Framebuffer;
 import net.minecraft.client.gl.WindowFramebuffer;
+import net.minecraft.client.item.ModelPredicateProviderRegistry;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.sound.PositionedSoundInstance;
 import net.minecraft.client.sound.SoundInstance;
@@ -102,6 +104,8 @@ public class SlenderMod implements ModInitializer, ClientModInitializer {
 
 		crawlKey = new KeyBinding("key.crawl", GLFW.GLFW_KEY_G, "key.categories.movement");
 
+		ModelPredicateProviderRegistry.register(ItemRegistry.FLASHLIGHT, new Identifier("slendermod","powered"), (stack, world, entity, seed) ->
+				ItemFlashlight.isFlashlightPowered(stack) ? 1 : 0);
 
 		RenderingRegistry.Register();
 		SoundRegistry.Register();

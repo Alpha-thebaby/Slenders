@@ -96,6 +96,14 @@
 			}
 		}
 	],
+	"overrides": [
+		{
+			"predicate": {
+				"slendermod:powered": 1
+			},
+			"model": "slendermod:item/flashlight_powered"
+		}
+	],
 	"display": {
 		"thirdperson_righthand": {
 			"translation": [0, 0.25, 0],

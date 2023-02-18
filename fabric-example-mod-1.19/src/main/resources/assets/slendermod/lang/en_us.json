@@ -2,6 +2,8 @@
   "itemGroup.slendermod.slendermod_tab": "Slendermod Tab",
 
   "item.slendermod.flashlight": "Flashlight",
+  "item.slendermod.flashlight.powered_on": "Powered: On",
+  "item.slendermod.flashlight.powered_off": "Powered: Off",
   "item.slendermod.boss_dash": "Boss Dash Attack",
   "item.slendermod.boss_hit": "Boss Hit Attack",
   "item.slendermod.grimoire": "Grimoire",
