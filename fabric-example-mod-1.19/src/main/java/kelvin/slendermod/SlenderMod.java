@@ -9,7 +9,6 @@ import kelvin.slendermod.common.entities.EntitySmallSlender;
 import kelvin.slendermod.common.items.ItemFlashlight;
 import kelvin.slendermod.common.items.ItemRegistry;
 import kelvin.slendermod.common.sounds.SoundRegistry;
-import kelvin.slendermod.network.client.ClientPacketHandler;
 import kelvin.slendermod.network.server.ServerPacketHandler;
 import ladysnake.satin.api.event.ShaderEffectRenderCallback;
 import ladysnake.satin.api.managed.ManagedShaderEffect;
@@ -99,8 +98,6 @@ public class SlenderMod implements ModInitializer, ClientModInitializer {
 
 	@Override
 	public void onInitializeClient() {
-
-		ClientPacketHandler.Start();
 
 		crawlKey = new KeyBinding("key.crawl", GLFW.GLFW_KEY_G, "key.categories.movement");
 
