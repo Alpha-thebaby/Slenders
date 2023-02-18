@@ -148,5 +148,11 @@
       "slendermod:entity/slender_boss/idle6",
       "slendermod:entity/slender_boss/idle7"
     ]
+  },
+  "flashlight_switch": {
+    "subtitle": "subtitle.slendermod.flashlight_switch",
+    "sounds": [
+      "slendermod:flashlight_switch"
+    ]
   }
 }

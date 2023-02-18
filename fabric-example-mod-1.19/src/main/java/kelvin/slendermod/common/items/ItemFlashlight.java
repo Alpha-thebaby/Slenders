@@ -1,5 +1,6 @@
 package kelvin.slendermod.common.items;
 
+import kelvin.slendermod.common.sounds.SoundRegistry;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -23,6 +24,7 @@ public class ItemFlashlight extends Item {
 
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
+        user.playSound(SoundRegistry.FLASHLIGHT_SWITCH, 1, 1);
         if (!world.isClient()) {
             ItemStack heldStack = user.getStackInHand(hand);
             if (heldStack.getItem() instanceof ItemFlashlight) {

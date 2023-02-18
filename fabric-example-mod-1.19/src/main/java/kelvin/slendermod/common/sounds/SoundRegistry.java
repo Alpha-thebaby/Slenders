@@ -36,6 +36,7 @@ public class SoundRegistry {
     public static SoundEvent BOSS_DASH;
     public static SoundEvent BOSS_ATTACK;
     public static SoundEvent BOSS_IDLE;
+    public static SoundEvent FLASHLIGHT_SWITCH;
 
     public static void Register() {
         HORROR_ROAR = RegisterSoundEvent("horror_roar");
@@ -51,5 +52,6 @@ public class SoundRegistry {
         BOSS_DASH = RegisterSoundEvent("boss_dash");
         BOSS_ATTACK = RegisterSoundEvent("boss_attack");
         BOSS_IDLE = RegisterSoundEvent("boss_idle");
+        FLASHLIGHT_SWITCH = RegisterSoundEvent("flashlight_switch");
     }
 }
