@@ -479,7 +479,7 @@ public abstract class AbstractEntitySlender extends PathAwareEntity implements G
         @Override
         public boolean listen(ServerWorld world, GameEvent event, GameEvent.Emitter emitter, Vec3d emitterPos) {
             if (event == SlenderMod.GUN_SHOT && emitter.sourceEntity() != null) {
-                AbstractEntitySlender.this.travelToGunShot(emitter.sourceEntity(), new BlockPos(emitterPos));
+                AbstractEntitySlender.this.travelToGunShot(emitter.sourceEntity());
                 return true;
             }
             return false;
