@@ -377,8 +377,10 @@ public abstract class AbstractEntitySlender extends PathAwareEntity implements G
     }
 
     protected void changeState(State newState) {
-        timeInState = 0;
-        currentState = newState;
+        if (getCurrentState() != newState) {
+            timeInState = 0;
+            currentState = newState;
+        }
     }
 
     protected void setCurrentAnimation(RawAnimation animation) {

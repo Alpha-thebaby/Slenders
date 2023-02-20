@@ -2,15 +2,12 @@ package kelvin.slendermod.common.items;
 
 import kelvin.slendermod.common.entities.EntitySlenderBoss;
 import net.minecraft.block.BlockState;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.MovementType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
 public class ItemBossAttack extends Item {
@@ -26,8 +23,8 @@ public class ItemBossAttack extends Item {
             if (user.hasVehicle()) {
                 var entity = user.getVehicle();
                 if (entity instanceof EntitySlenderBoss boss) {
-                    if (boss.GetState() == EntitySlenderBoss.STATE_DEFAULT) {
-                        boss.SetState(EntitySlenderBoss.STATE_ATTACK);
+                    if (boss.getCurrentState() == EntitySlenderBoss.State.DEFAULT) {
+                        boss.changeState(EntitySlenderBoss.State.ATTACK);
                         user.getItemCooldownManager().set(this, 30);
                     }
                 }
