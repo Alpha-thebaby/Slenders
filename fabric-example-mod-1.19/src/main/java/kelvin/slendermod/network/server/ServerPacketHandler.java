@@ -1,13 +1,11 @@
 package kelvin.slendermod.network.server;
 
-import kelvin.slendermod.SlenderMod;
+import kelvin.slendermod.common.entities.AbstractEntitySlender;
 import kelvin.slendermod.util.IPlayerCrawling;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.entity.Entity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
 
 import java.util.UUID;
 
@@ -24,8 +22,11 @@ public class ServerPacketHandler {
             ServerWorld world = player.getWorld();
             UUID uuid = buf.readUuid();
             Entity entity = world.getEntity(uuid);
-            BlockPos pos = buf.readBlockPos();
-            server.execute(() -> world.emitGameEvent(entity, SlenderMod.SLENDER_ROAR, pos));
+            server.execute(() -> {
+                if (entity instanceof AbstractEntitySlender slender) {
+                    slender.setAngryAt(player);
+                }
+            });
         });
     }
 }

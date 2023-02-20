@@ -56,7 +56,7 @@ public abstract class AbstractEntitySlender extends PathAwareEntity implements G
     protected AbstractEntitySlender(EntityType<? extends PathAwareEntity> entityType, World world) {
         super(entityType, world);
         PositionSource source = new EntityPositionSource(this, getStandingEyeHeight());
-        slenderRoarEventHandler = new EntityGameEventHandler<>(new SlenderRoarEventListener(source, SlenderMod.SLENDER_ROAR.getRange()));
+        slenderRoarEventHandler = new EntityGameEventHandler<>(new SlenderRoarEventListener(source, SlenderMod.GUN_SHOT.getRange()));
     }
 
     @Override
@@ -81,13 +81,19 @@ public abstract class AbstractEntitySlender extends PathAwareEntity implements G
         }
     }
 
-    private void travelToRoar(BlockPos pos) {
+    private void travelToGunShot(Entity entity) {
         if (anger <= 0) {
-            changeState(State.CHASING);
-            timeInState = 80;
-            angerTimer = 1;
-            lastSeenPos = pos.toCenterPos();
+            setAngryAt(entity);
         }
+    }
+
+    public void setAngryAt(Entity newTarget) {
+        target = newTarget;
+        changeState(State.CHASING);
+        timeInState = 80;
+        anger = 2;
+        angerTimer = 200;
+        lastSeenPos = newTarget.getPos();
     }
 
     @Override
@@ -472,11 +478,9 @@ public abstract class AbstractEntitySlender extends PathAwareEntity implements G
 
         @Override
         public boolean listen(ServerWorld world, GameEvent event, GameEvent.Emitter emitter, Vec3d emitterPos) {
-            if (event == SlenderMod.SLENDER_ROAR && emitter.sourceEntity() != null) {
-                if (!emitter.sourceEntity().getUuid().equals(AbstractEntitySlender.this.getUuid())) {
-                    AbstractEntitySlender.this.travelToRoar(new BlockPos(emitterPos));
-                    return true;
-                }
+            if (event == SlenderMod.GUN_SHOT && emitter.sourceEntity() != null) {
+                AbstractEntitySlender.this.travelToGunShot(emitter.sourceEntity(), new BlockPos(emitterPos));
+                return true;
             }
             return false;
         }

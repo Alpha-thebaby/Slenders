@@ -5,12 +5,13 @@
   "compatibilityLevel": "JAVA_17",
   "mixins": [
     "GunItemMixin",
+    "GunShootC2SPacketMixin",
+    "LambDynLightsMixin",
     "LivingEntityMixin",
     "PillarBlockMixin",
     "PlayerEntityMixin",
     "PlayerScreenHandlerMixin",
-    "ServerPlayerEntityMixin",
-    "LambDynLightsMixin"
+    "ServerPlayerEntityMixin"
   ],
   "client": [
     "ClientPlayerEntityMixin",

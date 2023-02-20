@@ -58,10 +58,10 @@ public class SlenderMod implements ModInitializer, ClientModInitializer {
 					entries.add(item, ItemGroup.StackVisibility.PARENT_AND_SEARCH_TABS);
 				});
 			}).build();
-	public static final GameEvent SLENDER_ROAR = Registry.register(
+	public static final GameEvent GUN_SHOT = Registry.register(
 			Registries.GAME_EVENT,
-			"slender_roar",
-			new GameEvent("slender_roar", 64)
+			"gun_shot",
+			new GameEvent("gun_shot", 64)
 	);
 	private static ForgeConfigSpec.BooleanValue ENABLE_SLENDER_EFFECTS;
 
