@@ -1,5 +1,6 @@
 package kelvin.slendermod.common.entities;
 
+import kelvin.slendermod.SlenderMod;
 import net.minecraft.block.DoorBlock;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
@@ -9,6 +10,7 @@ import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.mob.PathAwareEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
@@ -16,7 +18,13 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.LightType;
 import net.minecraft.world.World;
+import net.minecraft.world.event.EntityPositionSource;
+import net.minecraft.world.event.GameEvent;
+import net.minecraft.world.event.PositionSource;
+import net.minecraft.world.event.listener.EntityGameEventHandler;
+import net.minecraft.world.event.listener.GameEventListener;
 import org.jetbrains.annotations.Nullable;
+import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.core.animation.AnimatableManager;
 import software.bernie.geckolib.core.animation.AnimationController;
@@ -25,14 +33,16 @@ import software.bernie.geckolib.core.object.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
 import java.util.List;
+import java.util.function.BiConsumer;
 
-public abstract class AbstractEntitySlender extends EntitySlenderRoarListener {
+public abstract class AbstractEntitySlender extends PathAwareEntity implements GeoEntity {
 
     private static final TrackedData<Integer> CURRENT_ANIMATION = DataTracker.registerData(AbstractEntitySlender.class, TrackedDataHandlerRegistry.INTEGER);
     private static final TrackedData<Boolean> ROAR_TRACKER = DataTracker.registerData(AbstractEntitySlender.class, TrackedDataHandlerRegistry.BOOLEAN);
 
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
     private final List<RawAnimation> animations = List.of(getIdleAnim(), getWalkAnim(), getRoarAnim(), getRunAnim(), getLookAnim(), getAttackAnim());
+    private final EntityGameEventHandler<SlenderRoarEventListener> slenderRoarEventHandler;
     private State currentState = State.IDLE;
     private int timeInState = 0;
     private int angerTimer;
@@ -45,6 +55,8 @@ public abstract class AbstractEntitySlender extends EntitySlenderRoarListener {
 
     protected AbstractEntitySlender(EntityType<? extends PathAwareEntity> entityType, World world) {
         super(entityType, world);
+        PositionSource source = new EntityPositionSource(this, getStandingEyeHeight());
+        slenderRoarEventHandler = new EntityGameEventHandler<>(new SlenderRoarEventListener(source, SlenderMod.SLENDER_ROAR.getRange()));
     }
 
     @Override
@@ -63,16 +75,19 @@ public abstract class AbstractEntitySlender extends EntitySlenderRoarListener {
     }
 
     @Override
-    protected float getAnger() {
-        return anger;
+    public void updateEventHandler(BiConsumer<EntityGameEventHandler<?>, ServerWorld> callback) {
+        if (world instanceof ServerWorld serverWorld) {
+            callback.accept(slenderRoarEventHandler, serverWorld);
+        }
     }
 
-    @Override
-    protected void setChasing(BlockPos pos) {
-        changeState(State.CHASING);
-        timeInState = 80;
-        angerTimer = 1;
-        lastSeenPos = pos.toCenterPos();
+    private void travelToRoar(BlockPos pos) {
+        if (anger <= 0) {
+            changeState(State.CHASING);
+            timeInState = 80;
+            angerTimer = 1;
+            lastSeenPos = pos.toCenterPos();
+        }
     }
 
     @Override
@@ -433,5 +448,37 @@ public abstract class AbstractEntitySlender extends EntitySlenderRoarListener {
         CHASING,
         CONFUSED,
         ATTACKING;
+    }
+
+    private class SlenderRoarEventListener implements GameEventListener {
+
+        private final PositionSource source;
+        private final int range;
+
+        public SlenderRoarEventListener(PositionSource source, int range) {
+            this.source = source;
+            this.range = range;
+        }
+
+        @Override
+        public PositionSource getPositionSource() {
+            return source;
+        }
+
+        @Override
+        public int getRange() {
+            return range;
+        }
+
+        @Override
+        public boolean listen(ServerWorld world, GameEvent event, GameEvent.Emitter emitter, Vec3d emitterPos) {
+            if (event == SlenderMod.SLENDER_ROAR && emitter.sourceEntity() != null) {
+                if (!emitter.sourceEntity().getUuid().equals(AbstractEntitySlender.this.getUuid())) {
+                    AbstractEntitySlender.this.travelToRoar(new BlockPos(emitterPos));
+                    return true;
+                }
+            }
+            return false;
+        }
     }
 }
