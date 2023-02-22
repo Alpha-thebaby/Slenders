@@ -9,7 +9,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.SpawnEggItem;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
-import net.minecraft.util.Identifier;
 
 import static kelvin.slendermod.SlenderMod.id;
 
@@ -164,8 +163,6 @@ public class ItemRegistry {
             new BlockItem(BlockRegistry.UFO_INTERIOR, new Item.Settings())
     );
 
-    public static void Register() {
-
+    public static void register() {
     }
-
 }

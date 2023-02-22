@@ -15,7 +15,7 @@ public class ServerPacketHandler {
     public static final Identifier TOGGLED_FORCED_CRAWLING_ID = SlenderMod.id("toggled_forced_crawling");
     public static final Identifier SLENDER_SHOT_ID = SlenderMod.id("slender_shot");
 
-    public static void Start() {
+    public static void start() {
         ServerPlayNetworking.registerGlobalReceiver(TOGGLED_FORCED_CRAWLING_ID, (server, player, handler, buf, responseSender) ->
                 server.execute(() -> ((IForceCrawlingPlayer)player).toggleForcedCrawling()));
 

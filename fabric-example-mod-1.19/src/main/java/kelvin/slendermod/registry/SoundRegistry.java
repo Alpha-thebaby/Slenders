@@ -8,49 +8,35 @@ import net.minecraft.util.Identifier;
 
 public class SoundRegistry {
 
-    public static SoundEvent RegisterSoundEvent(String location, float distance) {
-        var id = SlenderMod.id(location);
-        var sound = SoundEvent.of(id, distance);
+    public static SoundEvent HORROR_ROAR = registerSoundEvent("horror_roar");
+    public static SoundEvent HORROR_GROWL = registerSoundEvent("horror_growl");
+    public static SoundEvent SMALL_SLENDER_LOOKING = registerSoundEvent("small_slender_looking");
+    public static SoundEvent SMALL_SLENDER_CHASING = registerSoundEvent("small_slender_chasing");
+    public static SoundEvent SHOCK = registerSoundEvent("shock");
+    public static SoundEvent BREATHING = registerSoundEvent("breathing");
+    public static SoundEvent HEARTBEAT = registerSoundEvent("heartbeat");
+    public static SoundEvent SOMETHING_APPROACHES = registerSoundEvent("something_approaches");
+    public static SoundEvent WIND = registerSoundEvent("wind");
+    public static SoundEvent BUZZING = registerSoundEvent("buzzing");
+    public static SoundEvent BOSS_DASH = registerSoundEvent("boss_dash");
+    public static SoundEvent BOSS_ATTACK = registerSoundEvent("boss_attack");
+    public static SoundEvent BOSS_IDLE = registerSoundEvent("boss_idle");
+    public static SoundEvent FLASHLIGHT_SWITCH = registerSoundEvent("flashlight_switch");
+
+    public static void register() {
+    }
+
+    public static SoundEvent registerSoundEvent(String location, float distance) {
+        Identifier id = SlenderMod.id(location);
+        SoundEvent sound = SoundEvent.of(id, distance);
         Registry.register(Registries.SOUND_EVENT, id, sound);
         return sound;
     }
 
-    public static SoundEvent RegisterSoundEvent(String location) {
-        var id = SlenderMod.id(location);
-        var sound = SoundEvent.of(id);
+    public static SoundEvent registerSoundEvent(String location) {
+        Identifier id = SlenderMod.id(location);
+        SoundEvent sound = SoundEvent.of(id);
         Registry.register(Registries.SOUND_EVENT, id, sound);
         return sound;
-    }
-
-    public static SoundEvent HORROR_ROAR;
-    public static SoundEvent HORROR_GROWL;
-    public static SoundEvent SMALL_SLENDER_LOOKING;
-    public static SoundEvent SMALL_SLENDER_CHASING;
-    public static SoundEvent SHOCK;
-    public static SoundEvent BREATHING;
-    public static SoundEvent HEARTBEAT;
-    public static SoundEvent SOMETHING_APPROACHES;
-    public static SoundEvent WIND;
-    public static SoundEvent BUZZING;
-    public static SoundEvent BOSS_DASH;
-    public static SoundEvent BOSS_ATTACK;
-    public static SoundEvent BOSS_IDLE;
-    public static SoundEvent FLASHLIGHT_SWITCH;
-
-    public static void Register() {
-        HORROR_ROAR = RegisterSoundEvent("horror_roar");
-        HORROR_GROWL = RegisterSoundEvent("horror_growl");
-        SMALL_SLENDER_LOOKING = RegisterSoundEvent("small_slender_looking");
-        SMALL_SLENDER_CHASING = RegisterSoundEvent("small_slender_chasing");
-        SHOCK = RegisterSoundEvent("shock");
-        BREATHING = RegisterSoundEvent("breathing");
-        HEARTBEAT = RegisterSoundEvent("heartbeat");
-        SOMETHING_APPROACHES = RegisterSoundEvent("something_approaches");
-        WIND = RegisterSoundEvent("wind");
-        BUZZING = RegisterSoundEvent("buzzing");
-        BOSS_DASH = RegisterSoundEvent("boss_dash");
-        BOSS_ATTACK = RegisterSoundEvent("boss_attack");
-        BOSS_IDLE = RegisterSoundEvent("boss_idle");
-        FLASHLIGHT_SWITCH = RegisterSoundEvent("flashlight_switch");
     }
 }

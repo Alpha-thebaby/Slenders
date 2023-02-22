@@ -113,7 +113,6 @@ public class BlockRegistry {
             new AccessReaderBlock(AbstractBlock.Settings.copy(Blocks.STONE))
     );
 
-    public static void Register() {
-
+    public static void register() {
     }
 }

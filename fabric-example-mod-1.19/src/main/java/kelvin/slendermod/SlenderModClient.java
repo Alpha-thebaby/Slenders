@@ -57,7 +57,7 @@ public class SlenderModClient implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
-        SoundRegistry.Register();
+        SoundRegistry.register();
 
         EntityRendererRegistry.register(EntityRegistry.SLENDERMAN, RendererSlenderman::new);
         EntityRendererRegistry.register(EntityRegistry.SLENDER_BOSS, RendererSlenderBoss::new);

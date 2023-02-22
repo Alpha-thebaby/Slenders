@@ -15,7 +15,6 @@ import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.tag.BiomeTags;
-import net.minecraft.util.Identifier;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.Heightmap;
 
@@ -40,8 +39,7 @@ public class EntityRegistry {
             FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, EntitySlenderBoss::new).dimensions(EntityDimensions.fixed(2, 4)).build()
     );
 
-    public static void Register()
-    {
+    public static void register() {
         FabricDefaultAttributeRegistry.register(SLENDERMAN, EntitySlenderman.createMobAttributes());
         FabricDefaultAttributeRegistry.register(SLENDER_BOSS, EntitySlenderBoss.createAttributes());
         FabricDefaultAttributeRegistry.register(SMALL_SLENDER, EntitySmallSlender.createMobAttributes());

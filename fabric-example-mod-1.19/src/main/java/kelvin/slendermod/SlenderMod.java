@@ -39,12 +39,12 @@ public class SlenderMod implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
-		EntityRegistry.Register();
-		BlockRegistry.Register();
+		EntityRegistry.register();
+		BlockRegistry.register();
 		BlockEntityRegistry.register();
-		ItemRegistry.Register();
+		ItemRegistry.register();
 
-		ServerPacketHandler.Start();
+		ServerPacketHandler.start();
 
 		ForgeConfigSpec.Builder builder = new ForgeConfigSpec.Builder();
 		ENABLE_SLENDER_EFFECTS = builder.define("enableSlenderEffects", true);
