@@ -1,5 +1,6 @@
 package kelvin.slendermod;
 
+import kelvin.slendermod.client.block.models.RotatableBlockEntityModel;
 import kelvin.slendermod.client.block.renderers.*;
 import kelvin.slendermod.client.entity.renderers.RendererSlenderBoss;
 import kelvin.slendermod.client.entity.renderers.RendererSlenderman;
@@ -33,7 +34,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.Util;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
@@ -74,11 +74,7 @@ public class SlenderModClient implements ClientModInitializer {
         BlockRenderLayerMap.INSTANCE.putBlock(BlockRegistry.BONES, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(BlockRegistry.HOSPITAL_BED, RenderLayer.getTranslucent());
 
-        BlockEntityRendererFactories.register(BlockRegistry.DEAD_TREE_ENTITY, ctx -> new RenderDeadTree());
-        BlockEntityRendererFactories.register(BlockRegistry.CAR_BODY_ENTITY, ctx -> new RenderCarBody());
-        BlockEntityRendererFactories.register(BlockRegistry.TRASH_ENTITY, ctx -> new RenderTrash());
-        BlockEntityRendererFactories.register(BlockRegistry.DEBRIS_ENTITY, ctx -> new RenderDebris());
-        BlockEntityRendererFactories.register(BlockRegistry.UFO_INTERIOR_ENTITY, ctx -> new RenderUFOInterior());
+        BlockEntityRendererFactories.register(BlockRegistry.ROTATABLE_BLOCK_ENTITY, ctx -> new RotatableBlockEntityRenderer());
 
         ModelPredicateProviderRegistry.register(ItemRegistry.FLASHLIGHT, SlenderMod.id("powered"), (stack, world, entity, seed) ->
                 ItemFlashlight.isFlashlightPowered(stack) ? 1 : 0);
