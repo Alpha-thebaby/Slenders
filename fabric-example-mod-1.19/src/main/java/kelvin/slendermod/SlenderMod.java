@@ -88,7 +88,7 @@ public class SlenderMod implements ModInitializer, ClientModInitializer {
 		ServerPacketHandler.Start();
 
 		ForgeConfigSpec.Builder builder = new ForgeConfigSpec.Builder();
-		ENABLE_SLENDER_EFFECTS = builder.define("showGlitchEffects", true);
+		ENABLE_SLENDER_EFFECTS = builder.define("enableSlenderEffects", true);
 		ForgeConfigRegistry.INSTANCE.register(MODID, ModConfig.Type.CLIENT, builder.build());
 	}
 
