@@ -1,10 +1,7 @@
 package kelvin.slendermod.registry;
 
 import kelvin.slendermod.block.*;
-import kelvin.slendermod.blockentity.RotatableBlockEntity;
-import kelvin.slendermod.blockentity.AccessReaderBlockEntity;
 import net.minecraft.block.*;
-import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.sound.BlockSoundGroup;
@@ -86,12 +83,6 @@ public class BlockRegistry {
             new RotatableBlockEntityBlock<>(AbstractBlock.Settings.copy(Blocks.IRON_BLOCK).nonOpaque().noCollision(), "ufo_interior")
     );
 
-    public static BlockEntityType<RotatableBlockEntity> ROTATABLE_BLOCK_ENTITY = Registry.register(
-            Registries.BLOCK_ENTITY_TYPE,
-            id("rotatable_block_entity"),
-            BlockEntityType.Builder.create(RotatableBlockEntity::new, CAR_BODY, TRASH, DEBRIS, DEAD_TREE, SCRATCHED_DEAD_TREE, UFO_INTERIOR).build(null)
-    );
-
     public static Block BARBED_WIRE_FENCE = Registry.register(
             Registries.BLOCK,
             id("barbed_wire_fence"),
@@ -120,12 +111,6 @@ public class BlockRegistry {
             Registries.BLOCK,
             id("access_reader"),
             new AccessReaderBlock(AbstractBlock.Settings.copy(Blocks.STONE))
-    );
-
-    public static BlockEntityType<AccessReaderBlockEntity> ACCESS_READER_ENTITY = Registry.register(
-            Registries.BLOCK_ENTITY_TYPE,
-            id("access_reader"),
-            BlockEntityType.Builder.create(AccessReaderBlockEntity::new, ACCESS_READER).build(null)
     );
 
     public static void Register() {

@@ -1,6 +1,5 @@
 package kelvin.slendermod;
 
-import kelvin.slendermod.client.block.models.RotatableBlockEntityModel;
 import kelvin.slendermod.client.block.renderers.*;
 import kelvin.slendermod.client.entity.renderers.RendererSlenderBoss;
 import kelvin.slendermod.client.entity.renderers.RendererSlenderman;
@@ -8,10 +7,7 @@ import kelvin.slendermod.client.entity.renderers.RendererSmallSlender;
 import kelvin.slendermod.entity.EntitySlenderman;
 import kelvin.slendermod.entity.EntitySmallSlender;
 import kelvin.slendermod.item.ItemFlashlight;
-import kelvin.slendermod.registry.BlockRegistry;
-import kelvin.slendermod.registry.EntityRegistry;
-import kelvin.slendermod.registry.ItemRegistry;
-import kelvin.slendermod.registry.SoundRegistry;
+import kelvin.slendermod.registry.*;
 import ladysnake.satin.api.event.ShaderEffectRenderCallback;
 import ladysnake.satin.api.managed.ManagedShaderEffect;
 import ladysnake.satin.api.managed.ShaderEffectManager;
@@ -74,7 +70,7 @@ public class SlenderModClient implements ClientModInitializer {
         BlockRenderLayerMap.INSTANCE.putBlock(BlockRegistry.BONES, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(BlockRegistry.HOSPITAL_BED, RenderLayer.getTranslucent());
 
-        BlockEntityRendererFactories.register(BlockRegistry.ROTATABLE_BLOCK_ENTITY, ctx -> new RotatableBlockEntityRenderer());
+        BlockEntityRendererFactories.register(BlockEntityRegistry.ROTATABLE_BLOCK_ENTITY, ctx -> new RotatableBlockEntityRenderer());
 
         ModelPredicateProviderRegistry.register(ItemRegistry.FLASHLIGHT, SlenderMod.id("powered"), (stack, world, entity, seed) ->
                 ItemFlashlight.isFlashlightPowered(stack) ? 1 : 0);

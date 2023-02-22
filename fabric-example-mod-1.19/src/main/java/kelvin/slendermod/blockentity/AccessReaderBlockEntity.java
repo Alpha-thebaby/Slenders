@@ -1,6 +1,6 @@
 package kelvin.slendermod.blockentity;
 
-import kelvin.slendermod.registry.BlockRegistry;
+import kelvin.slendermod.registry.BlockEntityRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
@@ -20,7 +20,7 @@ public class AccessReaderBlockEntity extends BlockEntity implements Clearable {
     private ItemStack card = ItemStack.EMPTY;
 
     public AccessReaderBlockEntity(BlockPos pos, BlockState state) {
-        super(BlockRegistry.ACCESS_READER_ENTITY, pos, state);
+        super(BlockEntityRegistry.ACCESS_READER_ENTITY, pos, state);
     }
 
     @Override

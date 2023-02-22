@@ -1,7 +1,7 @@
 package kelvin.slendermod.blockentity;
 
 import kelvin.slendermod.block.RotatableBlockEntityBlock;
-import kelvin.slendermod.registry.BlockRegistry;
+import kelvin.slendermod.registry.BlockEntityRegistry;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.util.math.BlockPos;
@@ -17,7 +17,7 @@ public class RotatableBlockEntity extends BlockEntity implements GeoBlockEntity 
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
 
     public RotatableBlockEntity(BlockPos pos, BlockState state) {
-        super(BlockRegistry.ROTATABLE_BLOCK_ENTITY, pos, state);
+        super(BlockEntityRegistry.ROTATABLE_BLOCK_ENTITY, pos, state);
     }
 
     @Override

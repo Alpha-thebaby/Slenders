@@ -1,10 +1,11 @@
 package kelvin.slendermod;
 
 import fuzs.forgeconfigapiport.api.config.v2.ForgeConfigRegistry;
+import kelvin.slendermod.network.server.ServerPacketHandler;
+import kelvin.slendermod.registry.BlockEntityRegistry;
 import kelvin.slendermod.registry.BlockRegistry;
 import kelvin.slendermod.registry.EntityRegistry;
 import kelvin.slendermod.registry.ItemRegistry;
-import kelvin.slendermod.network.server.ServerPacketHandler;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.minecraft.item.ItemGroup;
@@ -40,6 +41,7 @@ public class SlenderMod implements ModInitializer {
 	public void onInitialize() {
 		EntityRegistry.Register();
 		BlockRegistry.Register();
+		BlockEntityRegistry.register();
 		ItemRegistry.Register();
 
 		ServerPacketHandler.Start();
