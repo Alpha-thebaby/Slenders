@@ -43,7 +43,6 @@ import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.fml.config.ModConfig;
 import org.joml.Quaternionf;
 import org.joml.Vector3f;
-import org.lwjgl.glfw.GLFW;
 import org.lwjgl.opengl.GL30;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -51,6 +50,7 @@ import org.slf4j.LoggerFactory;
 import java.util.Random;
 
 public class SlenderMod implements ModInitializer, ClientModInitializer {
+
 	public static final String MODID = "slendermod";
 	public static final Logger LOGGER = LoggerFactory.getLogger("slendermod");
 	public static final ItemGroup SLENDERMOD_TAB = FabricItemGroup.builder(new Identifier(MODID, "slendermod_tab"))
@@ -66,23 +66,18 @@ public class SlenderMod implements ModInitializer, ClientModInitializer {
 			new GameEvent("gun_shot", 64)
 	);
 	private static ForgeConfigSpec.BooleanValue ENABLE_SLENDER_EFFECTS;
-
-	private Framebuffer framebuffer;
-
-	private final ManagedShaderEffect motionBlurShader = ShaderEffectManager.getInstance().manage(new Identifier(MODID, "shaders/post/motionblur.json"));
-
-	public static float fright_blur = 0.0f;
-	public static float fear_zoom = 1.0f;
-	public static float scared_timer = 0;
-	public static float scare_music = 0;
-	public static float breath_timer = 0;
-
-	public static float heartbeat_delay = 0;
-
-	public static float iTime = 0;
-
 	public static KeyBinding CRAWL_KEY;
-	public static SoundInstance somethingApproachesInstance;
+	private static final ManagedShaderEffect MOTION_BLUR_SHADER = ShaderEffectManager.getInstance().manage(new Identifier(MODID, "shaders/post/motionblur.json"));
+
+	private static Framebuffer FRAMEBUFFER;
+	private static float FRIGHT_BLUR = 0.0f;
+	private static float FEAR_ZOOM = 1.0f;
+	private static float SCARED_TIMER = 0;
+	private static float AMBIANCE_TIMER = 0;
+	private static float BREATH_TIMER = 0;
+	private static float HEARTBEAT_DELAY = 0;
+	private static float I_TIME = 0;
+	private static SoundInstance AMBIANCE_INSTANCE;
 
 	@Override
 	public void onInitialize() {
@@ -96,7 +91,6 @@ public class SlenderMod implements ModInitializer, ClientModInitializer {
 		ENABLE_SLENDER_EFFECTS = builder.define("showGlitchEffects", true);
 		ForgeConfigRegistry.INSTANCE.register(MODID, ModConfig.Type.CLIENT, builder.build());
 	}
-
 
 	@Override
 	public void onInitializeClient() {
@@ -114,41 +108,41 @@ public class SlenderMod implements ModInitializer, ClientModInitializer {
 			}
 
 			float tickDelta = 1.0f / 20.0f;
-			if (scared_timer > 0) {
-				if (heartbeat_delay <= 0) {
+			if (SCARED_TIMER > 0) {
+				if (HEARTBEAT_DELAY <= 0) {
 					Entity camera = client.getCameraEntity();
 					if (camera != null) {
 						playPositionlessSound(client, camera.getX(), camera.getY(), camera.getZ(), SoundRegistry.HEARTBEAT, SoundCategory.AMBIENT, 1.0f, 1.0f);
-						heartbeat_delay = 20 * 5;
+						HEARTBEAT_DELAY = 20 * 5;
 					}
 				}
-				fear_zoom = MathHelper.lerp(tickDelta * 8, fear_zoom, 0.5f);
-				fright_blur = MathHelper.lerp(tickDelta * 4, fright_blur, 1);
+				FEAR_ZOOM = MathHelper.lerp(tickDelta * 8, FEAR_ZOOM, 0.5f);
+				FRIGHT_BLUR = MathHelper.lerp(tickDelta * 4, FRIGHT_BLUR, 1);
 
-				scared_timer -= tickDelta;
-				if (scared_timer <= 0.01f) {
-					scared_timer = 0;
+				SCARED_TIMER -= tickDelta;
+				if (SCARED_TIMER <= 0.01f) {
+					SCARED_TIMER = 0;
 				}
 			} else {
-				fright_blur = MathHelper.lerp(tickDelta, fright_blur, 0);
-				if (fright_blur <= 0.01f) {
-					fear_zoom = 2.0f;
-					fright_blur = 0;
+				FRIGHT_BLUR = MathHelper.lerp(tickDelta, FRIGHT_BLUR, 0);
+				if (FRIGHT_BLUR <= 0.01f) {
+					FEAR_ZOOM = 2.0f;
+					FRIGHT_BLUR = 0;
 				}
 			}
 
-			if (scare_music > 0) {
-				scare_music--;
+			if (AMBIANCE_TIMER > 0) {
+				AMBIANCE_TIMER--;
 			}
-			if (heartbeat_delay > 0) {
-				heartbeat_delay--;
+			if (HEARTBEAT_DELAY > 0) {
+				HEARTBEAT_DELAY--;
 			}
-			if (breath_timer > 0) {
-				breath_timer--;
+			if (BREATH_TIMER > 0) {
+				BREATH_TIMER--;
 			}
 
-			if (scared_timer <= 0) {
-				client.getSoundManager().stop(somethingApproachesInstance);
+			if (SCARED_TIMER <= 0) {
+				client.getSoundManager().stop(AMBIANCE_INSTANCE);
 			}
 		});
 
@@ -176,25 +170,25 @@ public class SlenderMod implements ModInitializer, ClientModInitializer {
 				}
 
 				if (isNear) {
-					if (this.framebuffer == null) {
-						this.framebuffer = new WindowFramebuffer(minecraft.getWindow().getFramebufferWidth(), minecraft.getWindow().getFramebufferHeight());
-						this.framebuffer.setClearColor(0.0F, 0.0F, 0.0F, 0.0F);
-						this.framebuffer.clear(Util.getOperatingSystem() == Util.OperatingSystem.OSX);
+					if (FRAMEBUFFER == null) {
+						FRAMEBUFFER = new WindowFramebuffer(minecraft.getWindow().getFramebufferWidth(), minecraft.getWindow().getFramebufferHeight());
+						FRAMEBUFFER.setClearColor(0.0F, 0.0F, 0.0F, 0.0F);
+						FRAMEBUFFER.clear(Util.getOperatingSystem() == Util.OperatingSystem.OSX);
 
 					}
 
-					if (minecraft.getFramebuffer().textureWidth != this.framebuffer.textureWidth ||
-							minecraft.getFramebuffer().textureHeight != this.framebuffer.textureHeight) {
-						this.framebuffer.resize(minecraft.getFramebuffer().textureWidth, minecraft.getFramebuffer().textureHeight, true);
+					if (minecraft.getFramebuffer().textureWidth != FRAMEBUFFER.textureWidth ||
+							minecraft.getFramebuffer().textureHeight != FRAMEBUFFER.textureHeight) {
+						FRAMEBUFFER.resize(minecraft.getFramebuffer().textureWidth, minecraft.getFramebuffer().textureHeight, true);
 					}
 
-					motionBlurShader.setSamplerUniform("LastFrame", this.framebuffer);
-					motionBlurShader.setUniformValue("fright", fright_blur);
-					motionBlurShader.setUniformValue("fear_zoom", fear_zoom);
-					motionBlurShader.setUniformValue("iTime", iTime);
-					iTime += tickDelta;
-					motionBlurShader.render(tickDelta);
-					copyFrameBufferTexture(this.framebuffer.textureWidth, this.framebuffer.textureHeight, minecraft.getFramebuffer().fbo, minecraft.getFramebuffer().getColorAttachment(), this.framebuffer.fbo, this.framebuffer.getColorAttachment());
+					MOTION_BLUR_SHADER.setSamplerUniform("LastFrame", FRAMEBUFFER);
+					MOTION_BLUR_SHADER.setUniformValue("fright", FRIGHT_BLUR);
+					MOTION_BLUR_SHADER.setUniformValue("fear_zoom", FEAR_ZOOM);
+					MOTION_BLUR_SHADER.setUniformValue("iTime", I_TIME);
+					I_TIME += tickDelta;
+					MOTION_BLUR_SHADER.render(tickDelta);
+					copyFrameBufferTexture(FRAMEBUFFER.textureWidth, FRAMEBUFFER.textureHeight, minecraft.getFramebuffer().fbo, minecraft.getFramebuffer().getColorAttachment(), FRAMEBUFFER.fbo, FRAMEBUFFER.getColorAttachment());
 				}
 			}
 		});
@@ -234,21 +228,21 @@ public class SlenderMod implements ModInitializer, ClientModInitializer {
 			z = (float)minecraft.cameraEntity.getZ();
 		}
 
-		if (scared_timer <= 0) {
+		if (SCARED_TIMER <= 0) {
 			playPositionlessSound(minecraft, x, y, z, SoundRegistry.SHOCK, SoundCategory.AMBIENT, 1.0f, new Random().nextFloat() * 0.5f - 0.25f + 1.0f);
 
-			fear_zoom = 2.0f;
+			FEAR_ZOOM = 2.0f;
 		}
-		if (breath_timer <= 0) {
-			breath_timer = 20 * 60;
+		if (BREATH_TIMER <= 0) {
+			BREATH_TIMER = 20 * 60;
 			playPositionlessSound(minecraft, x, y, z, SoundRegistry.WIND, SoundCategory.AMBIENT, 1.0f, 1.0f);
 		}
-		if (scare_music <= 0) {
-			scare_music = 20 * 60 * 2.5f;
-			somethingApproachesInstance = playPositionlessSound(minecraft, x, y, z, SoundRegistry.SOMETHING_APPROACHES, SoundCategory.AMBIENT, 1.0f, new Random().nextFloat() * 0.5f - 0.25f + 1.0f);
+		if (AMBIANCE_TIMER <= 0) {
+			AMBIANCE_TIMER = 20 * 60 * 2.5f;
+			AMBIANCE_INSTANCE = playPositionlessSound(minecraft, x, y, z, SoundRegistry.SOMETHING_APPROACHES, SoundCategory.AMBIENT, 1.0f, new Random().nextFloat() * 0.5f - 0.25f + 1.0f);
 		}
-		scared_timer = 10;
-		fear_zoom = MathHelper.lerp(0.5f, fear_zoom, 2.0f);
+		SCARED_TIMER = 10;
+		FEAR_ZOOM = MathHelper.lerp(0.5f, FEAR_ZOOM, 2.0f);
 	}
 
 	public static boolean lookingAtEntity(MinecraftClient minecraft, Entity entity) {
@@ -264,9 +258,7 @@ public class SlenderMod implements ModInitializer, ClientModInitializer {
 				Vec3d direction = entity.getPos().subtract(camera.getPos()).normalize();
 
 				double dot = lookVec.dotProduct(direction);
-				if (dot > 0.5f && ((PlayerEntity)camera).canSee(entity)) {
-					return true;
-				}
+				return dot > 0.5f && ((PlayerEntity) camera).canSee(entity);
 			}
 		}
 		return false;
