@@ -22,7 +22,7 @@
       "kelvin.slendermod.SlenderMod"
     ],
     "client": [
-      "kelvin.slendermod.SlenderMod"
+      "kelvin.slendermod.SlenderModClient"
     ]
   },
   "mixins": [

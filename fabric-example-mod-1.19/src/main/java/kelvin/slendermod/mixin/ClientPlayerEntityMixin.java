@@ -1,6 +1,6 @@
 package kelvin.slendermod.mixin;
 
-import kelvin.slendermod.SlenderMod;
+import kelvin.slendermod.SlenderModClient;
 import kelvin.slendermod.network.server.ServerPacketHandler;
 import kelvin.slendermod.util.IForceCrawlingPlayer;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
@@ -30,7 +30,7 @@ public abstract class ClientPlayerEntityMixin extends LivingEntity {
 
     @Inject(at = @At("HEAD"), method = "tick")
     public void tick(CallbackInfo info) {
-        if (SlenderMod.CRAWL_KEY.isPressed()) {
+        if (SlenderModClient.CRAWL_KEY.isPressed()) {
             if (!isCrawlKeyPressed) {
                 isCrawlKeyPressed = true;
                 ((IForceCrawlingPlayer) this).toggleForcedCrawling();
