@@ -1,7 +1,7 @@
 package kelvin.slendermod.mixin;
 
 import com.ultreon.mods.pixelguns.item.gun.GunItem;
-import kelvin.slendermod.common.entities.AbstractEntitySlender;
+import kelvin.slendermod.entity.AbstractEntitySlender;
 import kelvin.slendermod.network.server.ServerPacketHandler;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;

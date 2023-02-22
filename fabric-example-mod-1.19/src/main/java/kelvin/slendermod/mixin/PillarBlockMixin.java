@@ -1,6 +1,6 @@
 package kelvin.slendermod.mixin;
 
-import kelvin.slendermod.common.sounds.SoundRegistry;
+import kelvin.slendermod.registry.SoundRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;

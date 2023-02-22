@@ -1,6 +1,6 @@
 package kelvin.slendermod.mixin;
 
-import kelvin.slendermod.common.blocks.SlendermanHeadBlock;
+import kelvin.slendermod.block.SlendermanHeadBlock;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.BlockItem;

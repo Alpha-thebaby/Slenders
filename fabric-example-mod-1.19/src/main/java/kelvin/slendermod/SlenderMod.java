@@ -1,14 +1,14 @@
 package kelvin.slendermod;
 
 import fuzs.forgeconfigapiport.api.config.v2.ForgeConfigRegistry;
-import kelvin.slendermod.client.rendering.RenderingRegistry;
-import kelvin.slendermod.common.blocks.BlockRegistry;
-import kelvin.slendermod.common.entities.EntityRegistry;
-import kelvin.slendermod.common.entities.EntitySlenderman;
-import kelvin.slendermod.common.entities.EntitySmallSlender;
-import kelvin.slendermod.common.items.ItemFlashlight;
-import kelvin.slendermod.common.items.ItemRegistry;
-import kelvin.slendermod.common.sounds.SoundRegistry;
+import kelvin.slendermod.client.RenderingRegistry;
+import kelvin.slendermod.registry.BlockRegistry;
+import kelvin.slendermod.registry.EntityRegistry;
+import kelvin.slendermod.entity.EntitySlenderman;
+import kelvin.slendermod.entity.EntitySmallSlender;
+import kelvin.slendermod.item.ItemFlashlight;
+import kelvin.slendermod.registry.ItemRegistry;
+import kelvin.slendermod.registry.SoundRegistry;
 import kelvin.slendermod.network.server.ServerPacketHandler;
 import ladysnake.satin.api.event.ShaderEffectRenderCallback;
 import ladysnake.satin.api.managed.ManagedShaderEffect;

@@ -1,6 +1,6 @@
 package kelvin.slendermod.network.server;
 
-import kelvin.slendermod.common.entities.AbstractEntitySlender;
+import kelvin.slendermod.entity.AbstractEntitySlender;
 import kelvin.slendermod.util.IForceCrawlingPlayer;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.entity.Entity;

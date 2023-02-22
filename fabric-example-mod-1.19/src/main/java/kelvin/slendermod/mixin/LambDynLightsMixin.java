@@ -1,7 +1,7 @@
 package kelvin.slendermod.mixin;
 
 import dev.lambdaurora.lambdynlights.LambDynLights;
-import kelvin.slendermod.common.items.ItemFlashlight;
+import kelvin.slendermod.item.ItemFlashlight;
 import net.minecraft.item.ItemStack;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;

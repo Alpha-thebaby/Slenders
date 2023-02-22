@@ -1,6 +1,6 @@
 package kelvin.slendermod.mixin;
 
-import kelvin.slendermod.common.entities.EntitySlenderBoss;
+import kelvin.slendermod.entity.EntitySlenderBoss;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.PlayerEntityRenderer;

@@ -1,7 +1,7 @@
 package kelvin.slendermod.mixin;
 
 import com.mojang.authlib.GameProfile;
-import kelvin.slendermod.common.items.ItemRegistry;
+import kelvin.slendermod.registry.ItemRegistry;
 import kelvin.slendermod.util.IForceCrawlingPlayer;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
