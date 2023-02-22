@@ -1,6 +1,8 @@
 {
   "itemGroup.slendermod.slendermod_tab": "Slendermod Tab",
 
+  "key.slendermod.crawl": "Crawl",
+
   "item.slendermod.flashlight": "Flashlight",
   "item.slendermod.flashlight.powered_on": "Powered: On",
   "item.slendermod.flashlight.powered_off": "Powered: Off",

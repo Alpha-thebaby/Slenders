@@ -16,6 +16,7 @@ import ladysnake.satin.api.managed.ShaderEffectManager;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
+import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gl.Framebuffer;
@@ -24,6 +25,7 @@ import net.minecraft.client.item.ModelPredicateProviderRegistry;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.sound.PositionedSoundInstance;
 import net.minecraft.client.sound.SoundInstance;
+import net.minecraft.client.util.InputUtil;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemGroup;
@@ -79,7 +81,7 @@ public class SlenderMod implements ModInitializer, ClientModInitializer {
 
 	public static float iTime = 0;
 
-	public static KeyBinding crawlKey;
+	public static KeyBinding CRAWL_KEY;
 	public static SoundInstance somethingApproachesInstance;
 
 	@Override
@@ -98,8 +100,7 @@ public class SlenderMod implements ModInitializer, ClientModInitializer {
 
 	@Override
 	public void onInitializeClient() {
-
-		crawlKey = new KeyBinding("key.crawl", GLFW.GLFW_KEY_G, "key.categories.movement");
+		CRAWL_KEY = KeyBindingHelper.registerKeyBinding(new KeyBinding("key.slendermod.crawl", InputUtil.Type.KEYSYM, InputUtil.GLFW_KEY_G, "key.categories.movement"));
 
 		ModelPredicateProviderRegistry.register(ItemRegistry.FLASHLIGHT, new Identifier("slendermod","powered"), (stack, world, entity, seed) ->
 				ItemFlashlight.isFlashlightPowered(stack) ? 1 : 0);
