@@ -47,7 +47,7 @@ import static kelvin.slendermod.SlenderMod.ENABLE_SLENDER_EFFECTS;
 
 public class SlenderModClient implements ClientModInitializer {
 
-    private static final ManagedShaderEffect MOTION_BLUR_SHADER = ShaderEffectManager.getInstance().manage(new Identifier(SlenderMod.MODID, "shaders/post/motionblur.json"));
+    private static final ManagedShaderEffect MOTION_BLUR_SHADER = ShaderEffectManager.getInstance().manage(SlenderMod.id("shaders/post/motionblur.json"));
     public static KeyBinding CRAWL_KEY;
     private static Framebuffer FRAMEBUFFER;
     private static float FRIGHT_BLUR = 0.0f;
@@ -80,7 +80,7 @@ public class SlenderModClient implements ClientModInitializer {
         BlockEntityRendererFactories.register(BlockRegistry.DEBRIS_ENTITY, ctx -> new RenderDebris());
         BlockEntityRendererFactories.register(BlockRegistry.UFO_INTERIOR_ENTITY, ctx -> new RenderUFOInterior());
 
-        ModelPredicateProviderRegistry.register(ItemRegistry.FLASHLIGHT, new Identifier("slendermod", "powered"), (stack, world, entity, seed) ->
+        ModelPredicateProviderRegistry.register(ItemRegistry.FLASHLIGHT, SlenderMod.id("powered"), (stack, world, entity, seed) ->
                 ItemFlashlight.isFlashlightPowered(stack) ? 1 : 0);
 
         CRAWL_KEY = KeyBindingHelper.registerKeyBinding(new KeyBinding("key.slendermod.crawl", InputUtil.Type.KEYSYM, InputUtil.GLFW_KEY_G, "key.categories.movement"));

@@ -9,15 +9,14 @@ import net.minecraft.util.Identifier;
 public class SoundRegistry {
 
     public static SoundEvent RegisterSoundEvent(String location, float distance) {
-        var id = new Identifier(SlenderMod.MODID, location);
+        var id = SlenderMod.id(location);
         var sound = SoundEvent.of(id, distance);
         Registry.register(Registries.SOUND_EVENT, id, sound);
         return sound;
     }
 
     public static SoundEvent RegisterSoundEvent(String location) {
-        var id = new Identifier(SlenderMod.MODID, location);
-
+        var id = SlenderMod.id(location);
         var sound = SoundEvent.of(id);
         Registry.register(Registries.SOUND_EVENT, id, sound);
         return sound;

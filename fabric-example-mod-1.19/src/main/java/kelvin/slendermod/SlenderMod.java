@@ -22,7 +22,7 @@ public class SlenderMod implements ModInitializer {
 
 	public static final String MODID = "slendermod";
 	public static final Logger LOGGER = LoggerFactory.getLogger("slendermod");
-	public static final ItemGroup SLENDERMOD_TAB = FabricItemGroup.builder(new Identifier(MODID, "slendermod_tab"))
+	public static final ItemGroup SLENDERMOD_TAB = FabricItemGroup.builder(id("slendermod_tab"))
 			.icon(() -> new ItemStack(ItemRegistry.SLENDER_HEAD))
 			.entries((enabledFeatures, entries, operatorEnabled) -> {
 				Registries.ITEM.stream().filter(item -> Registries.ITEM.getId(item).getNamespace().equals(MODID)).forEach(item -> {
@@ -31,7 +31,7 @@ public class SlenderMod implements ModInitializer {
 			}).build();
 	public static final GameEvent GUN_SHOT = Registry.register(
 			Registries.GAME_EVENT,
-			"gun_shot",
+			SlenderMod.id("gun_shot"),
 			new GameEvent("gun_shot", 64)
 	);
 	public static ForgeConfigSpec.BooleanValue ENABLE_SLENDER_EFFECTS;
@@ -47,5 +47,9 @@ public class SlenderMod implements ModInitializer {
 		ForgeConfigSpec.Builder builder = new ForgeConfigSpec.Builder();
 		ENABLE_SLENDER_EFFECTS = builder.define("enableSlenderEffects", true);
 		ForgeConfigRegistry.INSTANCE.register(MODID, ModConfig.Type.CLIENT, builder.build());
+	}
+
+	public static Identifier id(String path) {
+		return new Identifier(MODID, path);
 	}
 }

@@ -19,22 +19,24 @@ import net.minecraft.util.Identifier;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.Heightmap;
 
+import static kelvin.slendermod.SlenderMod.id;
+
 public class EntityRegistry {
     public static EntityType<EntitySlenderman> SLENDERMAN = Registry.register(
             Registries.ENTITY_TYPE,
-            new Identifier("slendermod", "slenderman"),
+            id("slenderman"),
             FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, EntitySlenderman::new).dimensions(EntityDimensions.fixed(2f, 4f)).build()
     );
 
     public static EntityType<EntitySmallSlender> SMALL_SLENDER = Registry.register(
             Registries.ENTITY_TYPE,
-            new Identifier("slendermod", "small_slender"),
+            id("small_slender"),
             FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, EntitySmallSlender::new).dimensions(EntityDimensions.fixed(0.75f, 1.5f)).build()
     );
 
     public static EntityType<EntitySlenderBoss> SLENDER_BOSS = Registry.register(
             Registries.ENTITY_TYPE,
-            new Identifier("slendermod", "slender_boss"),
+            id("slender_boss"),
             FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, EntitySlenderBoss::new).dimensions(EntityDimensions.fixed(2, 4)).build()
     );
 
@@ -47,7 +49,7 @@ public class EntityRegistry {
         spawnSlender(SLENDERMAN);
         spawnSlender(SMALL_SLENDER);
 
-        BiomeModifications.create(new Identifier("slendermod", "remove_all_entities")).add(ModificationPhase.REMOVALS, biomeSelectionContext ->
+        BiomeModifications.create(id("remove_all_entities")).add(ModificationPhase.REMOVALS, biomeSelectionContext ->
                 biomeSelectionContext.hasTag(BiomeTags.IS_OVERWORLD), (biomeSelectionContext, biomeModificationContext) -> {
             biomeModificationContext.getSpawnSettings().removeSpawns((spawnGroup, spawnEntry) ->
                     spawnGroup == SpawnGroup.MONSTER && spawnEntry.type != SLENDERMAN && spawnEntry.type != SMALL_SLENDER);

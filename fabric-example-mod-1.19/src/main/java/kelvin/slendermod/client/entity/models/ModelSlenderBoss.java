@@ -6,22 +6,24 @@ import net.minecraft.client.render.RenderLayer;
 import net.minecraft.util.Identifier;
 import software.bernie.geckolib.model.GeoModel;
 
+import static kelvin.slendermod.SlenderMod.id;
+
 public class ModelSlenderBoss extends GeoModel<EntitySlenderBoss>
 {
 
     @Override
     public Identifier getModelResource(EntitySlenderBoss object) {
-        return new Identifier(SlenderMod.MODID, "geo/slender_boss.geo.json");
+        return id("geo/slender_boss.geo.json");
     }
 
     @Override
     public Identifier getTextureResource(EntitySlenderBoss object) {
-        return new Identifier(SlenderMod.MODID, "textures/entities/slender_boss.png");
+        return id("textures/entities/slender_boss.png");
     }
 
     @Override
     public Identifier getAnimationResource(EntitySlenderBoss animatable) {
-        return new Identifier(SlenderMod.MODID, "animations/slender_boss.animation.json");
+        return id("animations/slender_boss.animation.json");
     }
 
     @Override

@@ -56,7 +56,7 @@ public class ItemGrimoire extends WrittenBookItem {
 
     private String[] getBookFileText(String fileName) {
         try {
-            Optional<Resource> file = MinecraftClient.getInstance().getResourceManager().getResource(new Identifier("slendermod", "book/" + fileName.trim()));
+            Optional<Resource> file = MinecraftClient.getInstance().getResourceManager().getResource(SlenderMod.id("book/" + fileName.trim()));
             InputStream stream = file.get().getInputStream();
             String text = new String(stream.readAllBytes());
             return text.split("\r");
