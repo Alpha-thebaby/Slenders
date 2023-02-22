@@ -21,21 +21,16 @@ import net.minecraft.world.Heightmap;
 import static kelvin.slendermod.SlenderMod.id;
 
 public class EntityRegistry {
-    public static EntityType<EntitySlenderman> SLENDERMAN = Registry.register(
-            Registries.ENTITY_TYPE,
-            id("slenderman"),
+
+    public static EntityType<EntitySlenderman> SLENDERMAN = register("slenderman",
             FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, EntitySlenderman::new).dimensions(EntityDimensions.fixed(2f, 4f)).build()
     );
 
-    public static EntityType<EntitySmallSlender> SMALL_SLENDER = Registry.register(
-            Registries.ENTITY_TYPE,
-            id("small_slender"),
+    public static EntityType<EntitySmallSlender> SMALL_SLENDER = register("small_slender",
             FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, EntitySmallSlender::new).dimensions(EntityDimensions.fixed(0.75f, 1.5f)).build()
     );
 
-    public static EntityType<EntitySlenderBoss> SLENDER_BOSS = Registry.register(
-            Registries.ENTITY_TYPE,
-            id("slender_boss"),
+    public static EntityType<EntitySlenderBoss> SLENDER_BOSS = register("slender_boss",
             FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, EntitySlenderBoss::new).dimensions(EntityDimensions.fixed(2, 4)).build()
     );
 
@@ -59,5 +54,9 @@ public class EntityRegistry {
                 world.getDifficulty() != Difficulty.PEACEFUL && MobEntity.canMobSpawn(type, world, spawnReason, pos, random));
 
         BiomeModifications.addSpawn(context -> context.hasTag(BiomeTags.IS_OVERWORLD) || context.hasTag(BiomeTags.IS_NETHER) || context.hasTag(BiomeTags.IS_END), SpawnGroup.MONSTER, slender, 37, 1, 3);
+    }
+
+    private static <T extends EntityType<?>> T register(String name, T entityType) {
+        return Registry.register(Registries.ENTITY_TYPE, id(name), entityType);
     }
 }

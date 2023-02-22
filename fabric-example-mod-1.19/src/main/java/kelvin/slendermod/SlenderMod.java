@@ -24,7 +24,7 @@ public class SlenderMod implements ModInitializer {
 	public static final String MODID = "slendermod";
 	public static final Logger LOGGER = LoggerFactory.getLogger("slendermod");
 	public static final ItemGroup SLENDERMOD_TAB = FabricItemGroup.builder(id("slendermod_tab"))
-			.icon(() -> new ItemStack(ItemRegistry.SLENDER_HEAD))
+			.icon(() -> new ItemStack(BlockRegistry.SLENDER_HEAD))
 			.entries((enabledFeatures, entries, operatorEnabled) -> {
 				Registries.ITEM.stream().filter(item -> Registries.ITEM.getId(item).getNamespace().equals(MODID)).forEach(item -> {
 					entries.add(item, ItemGroup.StackVisibility.PARENT_AND_SEARCH_TABS);
