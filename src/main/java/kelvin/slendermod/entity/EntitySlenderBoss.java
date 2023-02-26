@@ -13,6 +13,7 @@ import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.mob.PathAwareEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
@@ -56,6 +57,18 @@ public class EntitySlenderBoss extends PathAwareEntity implements GeoEntity {
     protected void initDataTracker() {
         super.initDataTracker();
         dataTracker.startTracking(CURRENT_ANIMATION, 0);
+    }
+
+    @Override
+    public void writeCustomDataToNbt(NbtCompound nbt) {
+        super.writeCustomDataToNbt(nbt);
+        nbt.putInt("currentAnimation", dataTracker.get(CURRENT_ANIMATION));
+    }
+
+    @Override
+    public void readCustomDataFromNbt(NbtCompound nbt) {
+        super.readCustomDataFromNbt(nbt);
+        dataTracker.set(CURRENT_ANIMATION, nbt.getInt("currentAnimation"));
     }
 
     @Override
