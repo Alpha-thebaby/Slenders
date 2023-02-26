@@ -10,6 +10,7 @@ import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.mob.PathAwareEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
@@ -64,6 +65,20 @@ public abstract class AbstractEntitySlender extends PathAwareEntity implements G
         super.initDataTracker();
         dataTracker.startTracking(CURRENT_ANIMATION, 0);
         dataTracker.startTracking(ROAR_TRACKER, false);
+    }
+
+    @Override
+    public void writeCustomDataToNbt(NbtCompound nbt) {
+        super.writeCustomDataToNbt(nbt);
+        nbt.putInt("currentAnimation", dataTracker.get(CURRENT_ANIMATION));
+        nbt.putBoolean("roarTracker", dataTracker.get(ROAR_TRACKER));
+    }
+
+    @Override
+    public void readCustomDataFromNbt(NbtCompound nbt) {
+        super.readCustomDataFromNbt(nbt);
+        dataTracker.set(CURRENT_ANIMATION, nbt.getInt("currentAnimation"));
+        dataTracker.set(ROAR_TRACKER, nbt.getBoolean("roarTracker"));
     }
 
     @Override
