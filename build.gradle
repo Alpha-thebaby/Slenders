@@ -48,6 +48,8 @@ repositories {
 		name = "Fuzs Mod Resources"
 		url = "https://raw.githubusercontent.com/Fuzss/modresources/main/maven/"
 	}
+
+	maven { url = 'https://jitpack.io' }
 }
 
 dependencies {
@@ -73,7 +75,10 @@ dependencies {
 	include modImplementation("dev.lambdaurora:spruceui:4.1.0+1.19.3")
 	modImplementation("fuzs.forgeconfigapiport:forgeconfigapiport-fabric:5.0.7")
 	modRuntimeOnly("curse.maven:configured-fabric-667378:${configured_version}")
-	modImplementation(files("ultreon-pixel-guns-1.0.0-local.jar"))
+	modRuntimeOnly("curse.maven:fabric-shield-lib-380649:${fabric_shield_lib_version}")
+	modRuntimeOnly("com.github.Chocohead:Fabric-ASM:v${fabric_asm_version}")
+	modRuntimeOnly("curse.maven:midnightlib-488090:${midnightlib_version}")
+	modImplementation(files("pixel-guns-1.0.0.jar"))
 }
 
 processResources {

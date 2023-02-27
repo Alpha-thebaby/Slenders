@@ -61,5 +61,10 @@
       <option name="name" value="Fuzs Mod Resources" />
       <option name="url" value="https://raw.githubusercontent.com/Fuzss/modresources/main/maven/" />
     </remote-repository>
+    <remote-repository>
+      <option name="id" value="maven5" />
+      <option name="name" value="maven5" />
+      <option name="url" value="https://jitpack.io" />
+    </remote-repository>
   </component>
 </project>
