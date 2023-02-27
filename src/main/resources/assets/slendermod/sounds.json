@@ -154,5 +154,11 @@
     "sounds": [
       "slendermod:flashlight_switch"
     ]
+  },
+  "access_granted": {
+    "subtitle": "subtitle.slendermod.access_granted",
+    "sounds": [
+      "slendermod:access_granted"
+    ]
   }
 }

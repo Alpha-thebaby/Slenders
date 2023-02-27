@@ -2,12 +2,15 @@ package kelvin.slendermod.block;
 
 import kelvin.slendermod.blockentity.AccessReaderBlockEntity;
 import kelvin.slendermod.registry.ItemRegistry;
+import kelvin.slendermod.registry.SoundRegistry;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvent;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.DirectionProperty;
 import net.minecraft.util.ActionResult;
@@ -36,25 +39,31 @@ public class AccessReaderBlock extends BlockWithEntity {
         if (blockEntity instanceof AccessReaderBlockEntity accessReaderBlockEntity) {
             ItemStack heldItem = player.getStackInHand(hand);
             ItemStack card = accessReaderBlockEntity.getCard();
-                if (world.isClient()) {
-                    return ActionResult.CONSUME;
-                }
 
-                if (card.isEmpty()) {
-                    if (heldItem.isOf(ItemRegistry.ACCESS_CARD)) {
-                        if (accessReaderBlockEntity.setCard(player, player.isCreative() ? heldItem.copy() : heldItem)) {
-                            updateNeighbors(state, world, pos);
-                            return ActionResult.SUCCESS;
-                        }
+            if (card.isEmpty()) {
+                if (heldItem.isOf(ItemRegistry.ACCESS_CARD)) {
+                    if (world.isClient()) {
+                        world.playSound(pos.getX(), pos.getY(), pos.getZ(), SoundRegistry.ACCESS_GRANTED, SoundCategory.BLOCKS, 1, 1, false);
+                        return ActionResult.CONSUME;
                     }
-                }
-                else {
-                    if (accessReaderBlockEntity.removeCard(player)) {
+
+                    if (accessReaderBlockEntity.setCard(player, player.isCreative() ? heldItem.copy() : heldItem)) {
                         updateNeighbors(state, world, pos);
                         return ActionResult.SUCCESS;
                     }
                 }
-                return ActionResult.CONSUME;
+            }
+            else {
+                if (world.isClient()) {
+                    return ActionResult.CONSUME;
+                }
+
+                if (accessReaderBlockEntity.removeCard(player)) {
+                    updateNeighbors(state, world, pos);
+                    return ActionResult.SUCCESS;
+                }
+            }
+            return ActionResult.CONSUME;
         }
         return ActionResult.PASS;
     }
@@ -118,9 +127,9 @@ public class AccessReaderBlock extends BlockWithEntity {
                 if (!card.isEmpty()) {
                     accessReaderBlockEntity.clear();
                     float f = 0.7F;
-                    double d0 = (double)(world.random.nextFloat() * f) + (double)0.15F;
-                    double d1 = (double)(world.random.nextFloat() * f) + (double)0.060000002F + 0.6D;
-                    double d2 = (double)(world.random.nextFloat() * f) + (double)0.15F;
+                    double d0 = (double) (world.random.nextFloat() * f) + (double) 0.15F;
+                    double d1 = (double) (world.random.nextFloat() * f) + (double) 0.060000002F + 0.6D;
+                    double d2 = (double) (world.random.nextFloat() * f) + (double) 0.15F;
                     ItemEntity itemEntity = new ItemEntity(world, pos.getX() + d0, pos.getY() + d1, pos.getZ() + d2, card);
                     itemEntity.setToDefaultPickupDelay();
                     world.spawnEntity(itemEntity);

@@ -22,6 +22,7 @@ public class SoundRegistry {
     public static SoundEvent BOSS_ATTACK = register("boss_attack");
     public static SoundEvent BOSS_IDLE = register("boss_idle");
     public static SoundEvent FLASHLIGHT_SWITCH = register("flashlight_switch");
+    public static SoundEvent ACCESS_GRANTED = register("access_granted");
 
     public static void register() {
     }
