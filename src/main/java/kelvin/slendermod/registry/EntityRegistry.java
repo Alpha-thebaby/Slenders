@@ -23,7 +23,7 @@ import static kelvin.slendermod.SlenderMod.id;
 public class EntityRegistry {
 
     public static EntityType<EntitySlenderman> SLENDERMAN = register("slenderman",
-            FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, EntitySlenderman::new).dimensions(EntityDimensions.fixed(2f, 4f)).build()
+            FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, EntitySlenderman::new).dimensions(EntityDimensions.fixed(1.5f, 4f)).build()
     );
 
     public static EntityType<EntitySmallSlender> SMALL_SLENDER = register("small_slender",
