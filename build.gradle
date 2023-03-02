@@ -17,7 +17,7 @@ repositories {
 	// See https://docs.gradle.org/current/userguide/declaring_repositories.html
 	// for more information about repositories.
     maven { url 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/' }
-	
+
 	// spruce ui / current ui library
 	maven {url "https://maven.gegy.dev"}
 	// mod menu
@@ -44,9 +44,11 @@ repositories {
 		url 'https://maven.gegy.dev'
 	}
 
-	maven {
-		name = "Fuzs Mod Resources"
-		url = "https://raw.githubusercontent.com/Fuzss/modresources/main/maven/"
+	repositories {
+		maven {
+			name 'Xander Maven'
+			url 'https://maven.isxander.dev/releases'
+		}
 	}
 
 	maven { url = 'https://jitpack.io' }
@@ -61,11 +63,11 @@ dependencies {
 	// Fabric API. This is technically optional, but you probably want it anyway.
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
-	// Uncomment the following line to enable the deprecated Fabric API modules. 
+	// Uncomment the following line to enable the deprecated Fabric API modules.
 	// These are included in the Fabric API production distribution and allow you to update your mod to the latest modules at a later more convenient time.
 
 	// modImplementation "net.fabricmc.fabric-api:fabric-api-deprecated:${project.fabric_version}"
-	
+
 	modImplementation 'software.bernie.geckolib:geckolib-fabric-1.19.3:4.0.3'
 
 	modImplementation "io.github.ladysnake:satin:1.10.0"
@@ -73,8 +75,7 @@ dependencies {
 	modImplementation "curse.maven:lambdynamiclights-393442:4257388"
 	modImplementation "curse.maven:modmenu-308702:4159524"
 	include modImplementation("dev.lambdaurora:spruceui:4.1.0+1.19.3")
-	modImplementation("fuzs.forgeconfigapiport:forgeconfigapiport-fabric:5.0.7")
-	modRuntimeOnly("curse.maven:configured-fabric-667378:${configured_version}")
+	modImplementation("dev.isxander:yet-another-config-lib:${yacl_version}")
 	modRuntimeOnly("curse.maven:fabric-shield-lib-380649:${fabric_shield_lib_version}")
 	modRuntimeOnly("com.github.Chocohead:Fabric-ASM:v${fabric_asm_version}")
 	modRuntimeOnly("curse.maven:midnightlib-488090:${midnightlib_version}")

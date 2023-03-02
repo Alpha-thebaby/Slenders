@@ -39,8 +39,6 @@ import org.lwjgl.opengl.GL30;
 
 import java.util.Random;
 
-import static kelvin.slendermod.SlenderMod.ENABLE_SLENDER_EFFECTS;
-
 public class SlenderModClient implements ClientModInitializer {
 
     private static final ManagedShaderEffect MOTION_BLUR_SHADER = ShaderEffectManager.getInstance().manage(SlenderMod.id("shaders/post/motionblur.json"));
@@ -82,7 +80,7 @@ public class SlenderModClient implements ClientModInitializer {
     }
 
     private static void serverTick(MinecraftClient client) {
-        if (client.isPaused() || !ENABLE_SLENDER_EFFECTS.get()) {
+        if (client.isPaused() || !ConfigRegistry.INSTANCE.getConfig().enableSlenderEffects) {
             return;
         }
 
@@ -130,7 +128,7 @@ public class SlenderModClient implements ClientModInitializer {
         MinecraftClient minecraft = MinecraftClient.getInstance();
         boolean isNear = false;
 
-        if (minecraft == null || !ENABLE_SLENDER_EFFECTS.get()) {
+        if (minecraft == null || !ConfigRegistry.INSTANCE.getConfig().enableSlenderEffects) {
             return;
         }
 

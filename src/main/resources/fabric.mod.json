@@ -23,6 +23,9 @@
     ],
     "client": [
       "kelvin.slendermod.SlenderModClient"
+    ],
+    "modmenu": [
+      "kelvin.slendermod.SlenderModModMenuCompat"
     ]
   },
   "mixins": [
@@ -34,8 +37,8 @@
     "minecraft": "~1.19",
     "java": ">=17",
     "lambdynlights": "2.2.0+1.19.3",
-    "forgeconfigapiport": "5.0.7",
     "geckolib": "4.0.3",
-    "satin": "1.10.0"
+    "satin": "1.10.0",
+    "yet-another-config-lib": ">=2.1.1"
   }
 }
