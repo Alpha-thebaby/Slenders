@@ -82,14 +82,6 @@ public abstract class AbstractEntitySlender extends PathAwareEntity implements G
     }
 
     @Override
-    protected void pushAway(Entity entity) {
-    }
-
-    @Override
-    public void pushAwayFrom(Entity entity) {
-    }
-
-    @Override
     public void updateEventHandler(BiConsumer<EntityGameEventHandler<?>, ServerWorld> callback) {
         if (world instanceof ServerWorld serverWorld) {
             callback.accept(slenderRoarEventHandler, serverWorld);
