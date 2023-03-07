@@ -3,6 +3,9 @@ package kelvin.slendermod.entity;
 import kelvin.slendermod.registry.SoundRegistry;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ai.pathing.MobNavigation;
+import net.minecraft.entity.attribute.DefaultAttributeContainer;
+import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.mob.PathAwareEntity;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.world.World;
@@ -21,6 +24,10 @@ public class EntitySmallSlender extends AbstractEntitySlender {
         super(entityType, world);
         stepHeight = 1.0f;
         ((MobNavigation)getNavigation()).setCanPathThroughDoors(true);
+    }
+
+    public static DefaultAttributeContainer.Builder createAttributes() {
+        return MobEntity.createMobAttributes().add(EntityAttributes.GENERIC_MAX_HEALTH, 22);
     }
 
     @Override

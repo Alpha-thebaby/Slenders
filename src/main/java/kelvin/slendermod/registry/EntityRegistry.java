@@ -35,9 +35,9 @@ public class EntityRegistry {
     );
 
     public static void register() {
-        FabricDefaultAttributeRegistry.register(SLENDERMAN, EntitySlenderman.createMobAttributes());
+        FabricDefaultAttributeRegistry.register(SLENDERMAN, EntitySlenderman.createAttributes());
         FabricDefaultAttributeRegistry.register(SLENDER_BOSS, EntitySlenderBoss.createAttributes());
-        FabricDefaultAttributeRegistry.register(SMALL_SLENDER, EntitySmallSlender.createMobAttributes());
+        FabricDefaultAttributeRegistry.register(SMALL_SLENDER, EntitySmallSlender.createAttributes());
 
         spawnSlender(SLENDERMAN);
         spawnSlender(SMALL_SLENDER);
