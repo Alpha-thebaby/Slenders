@@ -192,7 +192,12 @@ public abstract class AbstractEntitySlender extends PathAwareEntity implements G
                             }
                             else {
                                 angerTimer = 20 * 10;
-                                setCurrentAnimation(getRunAnim());
+                                if (!isInsideWaterOrBubbleColumn()) {
+                                    setCurrentAnimation(getRunAnim());
+                                }
+                                else {
+                                    setCurrentAnimation(getWalkAnim());
+                                }
 
                                 if (anger > 0) {
                                     if (!canSee(target)) {
