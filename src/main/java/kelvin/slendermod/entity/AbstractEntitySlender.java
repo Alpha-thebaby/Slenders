@@ -89,7 +89,7 @@ public abstract class AbstractEntitySlender extends PathAwareEntity implements G
     }
 
     private void travelToGunShot(Entity entity) {
-        if (anger <= 0) {
+        if (target == null) {
             setAngryAt(entity);
         }
     }
