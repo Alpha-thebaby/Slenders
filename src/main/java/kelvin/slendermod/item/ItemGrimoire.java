@@ -2,20 +2,17 @@ package kelvin.slendermod.item;
 
 import kelvin.slendermod.SlenderMod;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.item.TooltipContext;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemUsageContext;
 import net.minecraft.item.WrittenBookItem;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtList;
 import net.minecraft.nbt.NbtString;
 import net.minecraft.resource.Resource;
-import net.minecraft.text.Text;
-import net.minecraft.util.Identifier;
-import net.minecraft.world.World;
-import org.jetbrains.annotations.Nullable;
+import net.minecraft.util.ActionResult;
 
+import java.io.FileNotFoundException;
 import java.io.InputStream;
-import java.util.List;
 import java.util.Optional;
 
 public class ItemGrimoire extends WrittenBookItem {
@@ -25,39 +22,46 @@ public class ItemGrimoire extends WrittenBookItem {
     }
 
     @Override
-    public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
-        setNbt(stack);
-        super.appendTooltip(stack, world, tooltip, context);
+    public ActionResult useOnBlock(ItemUsageContext context) {
+        return ActionResult.PASS;
     }
 
-    public ItemStack setNbt(ItemStack stack) {
+    public static boolean writeCustomNBT(ItemStack stack) {
         NbtCompound nbtCompound = stack.getOrCreateNbt();
 
-        NbtList nbtList = new NbtList();
+        if (nbtCompound != null && !nbtCompound.getBoolean(RESOLVED_KEY)) {
+            NbtList nbtList = new NbtList();
+            String[] pageNames = getBookFileLines("pages.txt");
+            for (String pageName : pageNames) {
+                String[] pageLines = getBookFileLines(pageName);
+                StringBuilder pageText = new StringBuilder();
 
-        String[] pagesLines = getBookFileText("pages.txt");
-        for (String pagesLine : pagesLines) {
-            String[] pageLines = getBookFileText(pagesLine);
-            String pageText = "";
+                for (String line : pageLines) {
+                    pageText.append(line);
+                }
 
-            for (String line : pageLines) {
-                pageText += line;
+                if (pageText.length() > MAX_PAGE_VIEW_LENGTH) {
+                    return false;
+                }
+
+                nbtList.add(NbtString.of(pageText.toString()));
             }
 
-            nbtList.add(NbtString.of(pageText));
+            nbtCompound.putString(TITLE_KEY, "Grimoire");
+            nbtCompound.putString(AUTHOR_KEY, "Unknown");
+            nbtCompound.putInt(GENERATION_KEY, 0);
+            stack.setSubNbt(PAGES_KEY, nbtList);
+            return true;
         }
-
-        stack.setSubNbt("pages", nbtList);
-        nbtCompound.putString("author", "Unknown");
-        nbtCompound.putString("title", "Grimoire");
-        nbtCompound.putInt("generation", 0);
-        return stack;
+        else {
+            return false;
+        }
     }
 
-    private String[] getBookFileText(String fileName) {
+    private static String[] getBookFileLines(String fileName) {
         try {
             Optional<Resource> file = MinecraftClient.getInstance().getResourceManager().getResource(SlenderMod.id("book/" + fileName.trim()));
-            InputStream stream = file.get().getInputStream();
+            InputStream stream = file.orElseThrow(FileNotFoundException::new).getInputStream();
             String text = new String(stream.readAllBytes());
             return text.split("\r");
         }

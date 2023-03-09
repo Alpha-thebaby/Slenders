@@ -1,11 +1,11 @@
 package kelvin.slendermod.mixin;
 
 import com.mojang.authlib.GameProfile;
+import kelvin.slendermod.item.ItemGrimoire;
 import kelvin.slendermod.registry.ItemRegistry;
 import kelvin.slendermod.util.IForceCrawlingPlayer;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.WrittenBookItem;
 import net.minecraft.network.packet.s2c.play.OpenWrittenBookS2CPacket;
 import net.minecraft.server.network.ServerPlayNetworkHandler;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -36,7 +36,7 @@ public abstract class ServerPlayerEntityMixin extends PlayerEntity {
     @Inject(at = @At("HEAD"), method = "useBook")
     public void useBook(ItemStack book, Hand hand, CallbackInfo info) {
         if (book.isOf(ItemRegistry.GRIMOIRE)) {
-            if (WrittenBookItem.resolve(book, this.getCommandSource(), this)) {
+            if (ItemGrimoire.writeCustomNBT(book)) {
                 currentScreenHandler.sendContentUpdates();
             }
 
