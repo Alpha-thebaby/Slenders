@@ -61,6 +61,21 @@ public class EntitySmallSlender extends AbstractEntitySlender {
     }
 
     @Override
+    protected int getMinorAngerRange() {
+        return 20;
+    }
+
+    @Override
+    protected int getMajorAngerRange() {
+        return 10;
+    }
+
+    @Override
+    protected int getExtremeAngerRange() {
+        return 3;
+    }
+
+    @Override
     protected SoundEvent getAngrySound() {
         return SoundRegistry.SMALL_SLENDER_CHASING;
     }

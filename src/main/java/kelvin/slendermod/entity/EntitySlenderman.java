@@ -60,6 +60,21 @@ public class EntitySlenderman extends AbstractEntitySlender {
     }
 
     @Override
+    protected int getMinorAngerRange() {
+        return 30;
+    }
+
+    @Override
+    protected int getMajorAngerRange() {
+        return 20;
+    }
+
+    @Override
+    protected int getExtremeAngerRange() {
+        return 10;
+    }
+
+    @Override
     protected SoundEvent getAngrySound() {
         return SoundRegistry.HORROR_ROAR;
     }

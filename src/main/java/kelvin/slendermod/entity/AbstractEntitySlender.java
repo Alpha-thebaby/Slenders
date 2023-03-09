@@ -306,7 +306,7 @@ public abstract class AbstractEntitySlender extends PathAwareEntity implements G
                 if (canSee(closest)) {
                     int light = Math.max(world.getLightLevel(LightType.BLOCK, closest.getBlockPos().up()), world.getLightLevel(LightType.SKY, closest.getBlockPos().up()));
 
-                    if (closest.distanceTo(this) <= 3) {
+                    if (closest.distanceTo(this) <= getExtremeAngerRange()) {
                         anger += max_anger;
                     }
                     else {
@@ -314,8 +314,7 @@ public abstract class AbstractEntitySlender extends PathAwareEntity implements G
                         Vec3d direction = closest.getPos().subtract(getPos()).normalize();
                         double dot = look.dotProduct(direction);
 
-                        if (closest.distanceTo(this) <= 10) {
-
+                        if (closest.distanceTo(this) <= getMajorAngerRange()) {
                             if (light > 7) {
                                 if (dot > 0) {
                                     anger += max_anger;
@@ -347,7 +346,7 @@ public abstract class AbstractEntitySlender extends PathAwareEntity implements G
                                 }
                             }
                         }
-                        else if (closest.distanceTo(this) <= 20) {
+                        else if (closest.distanceTo(this) <= getMinorAngerRange()) {
                             if (light > 7) {
                                 if (dot > 0) {
                                     if (closest.isSprinting()) {
@@ -444,6 +443,12 @@ public abstract class AbstractEntitySlender extends PathAwareEntity implements G
     protected abstract int getReach();
 
     protected abstract int getDamageHeight();
+
+    protected abstract int getMinorAngerRange();
+
+    protected abstract int getMajorAngerRange();
+
+    protected abstract int getExtremeAngerRange();
 
     protected abstract SoundEvent getAngrySound();
 
