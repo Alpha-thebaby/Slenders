@@ -39,8 +39,8 @@ public class EntityRegistry {
         FabricDefaultAttributeRegistry.register(SLENDER_BOSS, EntitySlenderBoss.createAttributes());
         FabricDefaultAttributeRegistry.register(SMALL_SLENDER, EntitySmallSlender.createAttributes());
 
-        spawnSlender(SLENDERMAN);
-        spawnSlender(SMALL_SLENDER);
+        spawnSlender(SLENDERMAN, 9);
+        spawnSlender(SMALL_SLENDER, 5);
 
         BiomeModifications.create(id("remove_all_entities")).add(ModificationPhase.REMOVALS, biomeSelectionContext ->
                 biomeSelectionContext.hasTag(BiomeTags.IS_OVERWORLD), (biomeSelectionContext, biomeModificationContext) -> {
@@ -49,11 +49,11 @@ public class EntityRegistry {
         });
     }
 
-    private static <T extends MobEntity> void spawnSlender(EntityType<T> slender) {
+    private static <T extends MobEntity> void spawnSlender(EntityType<T> slender, int weight) {
         SpawnRestriction.register(slender, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, (type, world, spawnReason, pos, random) ->
                 world.getDifficulty() != Difficulty.PEACEFUL && MobEntity.canMobSpawn(type, world, spawnReason, pos, random));
 
-        BiomeModifications.addSpawn(context -> context.hasTag(BiomeTags.IS_OVERWORLD) || context.hasTag(BiomeTags.IS_NETHER) || context.hasTag(BiomeTags.IS_END), SpawnGroup.MONSTER, slender, 37, 1, 3);
+        BiomeModifications.addSpawn(context -> context.hasTag(BiomeTags.IS_OVERWORLD) || context.hasTag(BiomeTags.IS_NETHER) || context.hasTag(BiomeTags.IS_END), SpawnGroup.MONSTER, slender, weight, 1, 3);
     }
 
     private static <T extends EntityType<?>> T register(String name, T entityType) {
